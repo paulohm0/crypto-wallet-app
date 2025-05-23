@@ -60,7 +60,9 @@ class WelcomeView extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFEB83D),
                     shape: RoundedRectangleBorder(
