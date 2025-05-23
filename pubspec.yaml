@@ -7,6 +7,7 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  flutter_native_splash: ^2.4.6
   flutter:
     sdk: flutter
 
@@ -22,9 +23,9 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/splash/splash.png
+    - assets/images/splash/splash_branding.png
 
   # fonts:
   #   - family: Schyler
@@ -37,3 +38,18 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/images/splash/splash.png
+
+  android_12:
+    image: assets/images/splash/splash.png
+    icon_background_color: "#000000"
+    color: "#000000"
+
+  android: true
+  ios: true
+  web: false
+  android_gravity: center
+  ios_content_mode: center
