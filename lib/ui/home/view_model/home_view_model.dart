@@ -14,11 +14,13 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> fetchCryptoCurrencies(String currency) async {
     try {
+      print('🔄 Buscando moedas com base em $currency...');
       _currency = currency;
       cryptoCurrencies = await datasource.getCryptos(currency);
       notifyListeners();
-    } catch (error) {
-      throw Exception('Erro ao acessar as criptomoedas');
+    } catch (error, stack) {
+      print('❌ Erro no fetchCryptoCurrencies: $error');
+      print('📌 StackTrace: $stack');
     }
   }
 }

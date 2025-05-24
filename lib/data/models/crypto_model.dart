@@ -27,10 +27,10 @@ class CryptoModel {
       color: json['color'],
       imageUrl: json['image_url'],
       currency: json['currency'],
-      percentChange: json['percent_change'],
+      percentChange: (json['percent_change'] as num?)?.toDouble() ?? 0.0,
       latestPrice:
           json['latest_price'] == null
-              ? null
+              ? LatestPrice.empty()
               : LatestPrice.fromJson(json['latest_price']),
     );
   }
@@ -56,12 +56,23 @@ class LatestPrice {
 
   factory LatestPrice.fromJson(Map<String, dynamic> json) {
     return LatestPrice(
-      amount: json['amount'] == null ? null : Amount.fromJson(json['amount']),
-      timestamp: json['timestamp'],
+      amount:
+          json['amount'] == null
+              ? Amount.empty()
+              : Amount.fromJson(json['amount']),
+      timestamp: DateTime.parse(json['timestamp']),
       percentChange:
           json['percent_change'] == null
-              ? null
+              ? PercentChange.empty()
               : PercentChange.fromJson(json['percent_change']),
+    );
+  }
+
+  factory LatestPrice.empty() {
+    return LatestPrice(
+      amount: Amount.empty(),
+      timestamp: DateTime.now(),
+      percentChange: PercentChange.empty(),
     );
   }
 }
@@ -81,6 +92,10 @@ class Amount {
 
   factory Amount.fromJson(Map<String, dynamic> json) {
     return Amount(amount: json['amount'], currency: json['currency']);
+  }
+
+  factory Amount.empty() {
+    return Amount(amount: '0.00', currency: '---');
   }
 }
 
@@ -110,12 +125,22 @@ class PercentChange {
 
   factory PercentChange.fromJson(Map<String, dynamic> json) {
     return PercentChange(
-      hour: json['hour'],
-      day: json['day'],
-      week: json['week'],
-      month: json['month'],
-      year: json['year'],
-      all: json['all'],
+      hour: (json['hour'] as num?)?.toDouble() ?? 0.0,
+      day: (json['day'] as num?)?.toDouble() ?? 0.0,
+      week: (json['week'] as num?)?.toDouble() ?? 0.0,
+      month: (json['month'] as num?)?.toDouble() ?? 0.0,
+      year: (json['year'] as num?)?.toDouble() ?? 0.0,
+      all: (json['all'] as num?)?.toDouble() ?? 0.0,
+    );
+  }
+  factory PercentChange.empty() {
+    return PercentChange(
+      hour: 0.0,
+      day: 0.0,
+      week: 0.0,
+      month: 0.0,
+      year: 0.0,
+      all: 0.0,
     );
   }
 }

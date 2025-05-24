@@ -9,10 +9,19 @@ class CryptoDatasource {
   Future<List<CryptoModel>> getCryptos(String currency) async {
     try {
       final response = await dio.get(currency);
-      final List<dynamic> data = response.data['data'];
-      return data.map((crypto) => CryptoModel.fromJson(crypto)).toList();
-    } catch (error) {
-      throw Exception('Não foi possivel acessar as cryptomoedas');
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data['data'];
+        return data.map((e) => CryptoModel.fromJson(e)).toList();
+      } else {
+        throw Exception(
+          'Erro ${response.statusCode}: ${response.statusMessage}',
+        );
+      }
+    } catch (error, stackTrace) {
+      print('Erro em getCryptos: $error');
+      print('StackTrace: $stackTrace');
+      throw Exception('Não foi possível acessar as criptomoedas');
     }
   }
 }

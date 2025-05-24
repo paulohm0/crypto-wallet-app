@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 subtitle: Text(
-                  'Preço: ${crypto.latestPrice.toString()}',
+                  'Preço: ${crypto.latestPrice?.amount?.amount}',
                   style: TextStyle(color: Colors.white),
                 ),
               );
