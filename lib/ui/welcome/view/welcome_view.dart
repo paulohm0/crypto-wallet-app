@@ -12,7 +12,7 @@ class WelcomeView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
@@ -23,7 +23,7 @@ class WelcomeView extends StatelessWidget {
                     width: 200,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
+                    padding: const EdgeInsets.only(left: 8.0, top: 96.0),
                     child: ShaderMask(
                       shaderCallback: (rect) {
                         return LinearGradient(
@@ -37,8 +37,8 @@ class WelcomeView extends StatelessWidget {
                       },
                       blendMode: BlendMode.dstIn,
                       child: SizedBox(
-                        height: 450,
-                        width: 400,
+                        height: 300,
+                        width: 300,
                         child: Image.asset(
                           'assets/images/graph.png',
                           fit: BoxFit.fill,
@@ -48,14 +48,29 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(
-                'Eleve o nível do seu portfólio cripto.',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.start,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Eleve o nível do seu portfólio cripto.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'O mundo das criptomoedas em um só lugar.',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ],
               ),
               SizedBox(
                 width: double.infinity,
