@@ -1,8 +1,9 @@
+import 'package:crypto_wallet/core/utils/view_state_enum.dart';
 import 'package:crypto_wallet/data/datasource/crypto_datasource.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
-import 'package:flutter/material.dart';
+import 'package:crypto_wallet/shared/base_view_model.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class HomeViewModel extends BaseViewModel {
   final CryptoDatasource datasource;
   HomeViewModel(this.datasource) {
     fetchCryptoCurrencies(_currency);
@@ -14,13 +15,14 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> fetchCryptoCurrencies(String currency) async {
     try {
-      print('🔄 Buscando moedas com base em $currency...');
+      setState(ViewState.loading);
       _currency = currency;
       cryptoCurrencies = await datasource.getCryptos(currency);
+      setState(ViewState.success);
       notifyListeners();
-    } catch (error, stack) {
-      print('❌ Erro no fetchCryptoCurrencies: $error');
-      print('📌 StackTrace: $stack');
+    } catch (error) {
+      setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');
     }
+    notifyListeners();
   }
 }
