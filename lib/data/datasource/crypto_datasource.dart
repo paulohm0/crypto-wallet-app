@@ -19,9 +19,7 @@ class CryptoDatasource {
         );
       }
     } catch (error, stackTrace) {
-      print('Erro em getCryptos: $error');
-      print('StackTrace: $stackTrace');
-      throw Exception('Não foi possível acessar as criptomoedas');
+      throw Exception('Erro em getCryptos: $error / StackTrace: $stackTrace');
     }
   }
 }

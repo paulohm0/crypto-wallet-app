@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 class CryptoItemHome extends StatelessWidget {
   final String iconAssetPath;
   final String name;
-  final String price;
   final String symbol;
   final String amount;
   final double percentChangeLastHour;
+  final String currencySymbol;
   const CryptoItemHome({
     super.key,
     required this.name,
-    required this.price,
     required this.symbol,
     required this.iconAssetPath,
     required this.amount,
     required this.percentChangeLastHour,
+    required this.currencySymbol,
   });
 
   @override
@@ -24,8 +24,8 @@ class CryptoItemHome extends StatelessWidget {
       children: [
         Image.network(
           iconAssetPath,
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
               'assets/images/default_icon_image.jpg',
@@ -45,7 +45,7 @@ class CryptoItemHome extends StatelessWidget {
                 name,
                 maxLines: 1,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -64,9 +64,9 @@ class CryptoItemHome extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                amount.toBRLCurrency(),
+                amount.toCurrency(currencySymbol),
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

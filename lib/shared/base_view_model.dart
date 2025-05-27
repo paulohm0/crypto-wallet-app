@@ -1,5 +1,6 @@
-import 'package:crypto_wallet/core/utils/view_state_enum.dart';
 import 'package:flutter/material.dart';
+
+enum ViewState { idle, loading, success, error }
 
 class BaseViewModel extends ChangeNotifier {
   ViewState _state = ViewState.idle;

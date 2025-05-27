@@ -1,13 +1,10 @@
 import 'package:intl/intl.dart';
 
-extension BRLFormatter on String {
-  String toBRLCurrency() {
-    final amountFormatted = double.parse(this);
-    final formatter = NumberFormat.currency(
-      locale: 'pt_BR',
-      symbol: 'R\$',
-      decimalDigits: 2,
-    );
-    return formatter.format(amountFormatted);
+extension CurrencyFormatter on String {
+  String toCurrency(String symbol) {
+    final value = double.tryParse(this);
+    if (value == null) return this;
+
+    return NumberFormat.currency(locale: 'pt_BR', symbol: symbol).format(value);
   }
 }

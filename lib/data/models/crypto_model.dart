@@ -5,7 +5,7 @@ class CryptoModel {
   final String? color;
   final String imageUrl;
   final String? currency;
-  final double? percentChange;
+  final double percentChange;
   final LatestPrice latestPrice;
 
   CryptoModel({
