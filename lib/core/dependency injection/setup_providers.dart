@@ -1,4 +1,3 @@
-// setup_providers.dart
 import 'package:crypto_wallet/core/services/dio_client.dart';
 import 'package:crypto_wallet/data/datasource/crypto_datasource.dart';
 import 'package:crypto_wallet/ui/home/view_model/home_view_model.dart';
