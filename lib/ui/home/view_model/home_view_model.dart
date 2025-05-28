@@ -1,6 +1,6 @@
 import 'package:crypto_wallet/data/datasource/crypto_datasource.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
-import 'package:crypto_wallet/shared/base%20view%20model/base_view_model.dart';
+import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
 
 class HomeViewModel extends BaseViewModel {
@@ -65,7 +65,10 @@ class HomeViewModel extends BaseViewModel {
       _currency = currency;
       selectedFilter = HomeFilterCrypto.all;
       allCryptos = await datasource.getCryptos(currency);
-      filteredCryptos = allCryptos;
+      filteredCryptos =
+          allCryptos
+              .where((crypto) => crypto.latestPrice.amount.amount != '0.00')
+              .toList();
       setState(ViewState.success);
     } catch (error) {
       setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');

@@ -21,35 +21,28 @@ class PopupMenuFilterCrypto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-      child: SegmentedButton<HomeFilterCrypto>(
-        segments:
-            HomeFilterCrypto.values
-                .map(
-                  (segment) => ButtonSegment<HomeFilterCrypto>(
-                    value: segment,
-                    label: Text(
-                      segment.label,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                      ),
+    return SegmentedButton<HomeFilterCrypto>(
+      segments:
+          HomeFilterCrypto.values
+              .map(
+                (segment) => ButtonSegment<HomeFilterCrypto>(
+                  value: segment,
+                  label: Text(
+                    segment.label,
+                    style: const TextStyle(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                )
-                .toList(),
-        selected: {selectedFilter},
-        onSelectionChanged: (Set<HomeFilterCrypto> filter) {
-          onFilterChanged(filter.first);
-        },
-        style: _segmentedButtonStyle(),
-        showSelectedIcon: false,
-      ),
+                ),
+              )
+              .toList(),
+      selected: {selectedFilter},
+      onSelectionChanged: (Set<HomeFilterCrypto> filter) {
+        onFilterChanged(filter.first);
+      },
+      style: _segmentedButtonStyle(),
+      showSelectedIcon: false,
     );
   }
 }
@@ -69,7 +62,7 @@ ButtonStyle _segmentedButtonStyle() {
               : const Color(0xFFFEB83D),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
     ),
     side: WidgetStateProperty.all(
       const BorderSide(color: Color(0xFFFEB83D), width: 0.8),
@@ -78,6 +71,6 @@ ButtonStyle _segmentedButtonStyle() {
       const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
     ),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    visualDensity: VisualDensity.compact,
+    visualDensity: VisualDensity(horizontal: -4, vertical: -4),
   );
 }

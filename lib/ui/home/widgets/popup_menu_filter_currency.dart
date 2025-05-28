@@ -27,17 +27,19 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
 
   Widget _buildButton() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+      height: 24,
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: const Color(0xFFFEB83D), width: 0.6),
+        color: Color(0xFF1E1E1E),
+        borderRadius: BorderRadius.circular(6.0),
+        border: Border.all(color: const Color(0xFFFEB83D), width: 0.8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: const TextStyle(color: Colors.white, fontSize: 9),
           ),
           const SizedBox(width: 4),
           const Icon(Icons.arrow_drop_down, color: Color(0xFFFEB83D)),
@@ -62,10 +64,11 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
       itemBuilder: (BuildContext context) {
         return Currency.values.map((currency) {
           return PopupMenuItem<String>(
+            height: 30.0,
             value: currency.code,
             child: Text(
               '${currency.flagEmoji} ${currency.name}',
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontSize: 10),
             ),
           );
         }).toList();

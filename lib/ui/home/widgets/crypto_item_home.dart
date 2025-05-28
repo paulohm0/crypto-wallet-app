@@ -29,6 +29,8 @@ class CryptoItemHome extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
               'assets/images/default_icon_image.jpg',
+              width: 30,
+              height: 30,
               fit: BoxFit.cover,
             );
           },
