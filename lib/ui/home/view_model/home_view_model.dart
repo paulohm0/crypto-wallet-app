@@ -10,8 +10,8 @@ class HomeViewModel extends BaseViewModel {
     fetchCryptoCurrencies(_currency);
   }
 
-  List<CryptoModel> allCryptosCurrencies = [];
-  List<CryptoModel> filteredCryptosCurrencies = [];
+  List<CryptoModel> allCryptos = [];
+  List<CryptoModel> filteredCryptos = [];
 
   late String _currency;
   String get currency => _currency;
@@ -22,27 +22,27 @@ class HomeViewModel extends BaseViewModel {
     selectedFilter = label;
     switch (label) {
       case HomeFilterCrypto.all:
-        filteredCryptosCurrencies = allCryptosCurrencies;
+        filteredCryptos = allCryptos;
         break;
       case HomeFilterCrypto.high:
-        filteredCryptosCurrencies =
-            allCryptosCurrencies
+        filteredCryptos =
+            allCryptos
                 .where((crypto) => crypto.latestPrice.percentChange.hour > 0)
-                .toList();
-        filteredCryptosCurrencies.sort(
-          (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
-              .compareTo(cryptoA.latestPrice.percentChange.hour),
-        );
+                .toList()
+              ..sort(
+                (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
+                    .compareTo(cryptoA.latestPrice.percentChange.hour),
+              );
         break;
       case HomeFilterCrypto.low:
-        filteredCryptosCurrencies =
-            allCryptosCurrencies
+        filteredCryptos =
+            allCryptos
                 .where((crypto) => crypto.latestPrice.percentChange.hour < 0)
-                .toList();
-        filteredCryptosCurrencies.sort(
-          (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
-              .compareTo(cryptoA.latestPrice.percentChange.hour),
-        );
+                .toList()
+              ..sort(
+                (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
+                    .compareTo(cryptoA.latestPrice.percentChange.hour),
+              );
         break;
     }
     notifyListeners();
@@ -50,8 +50,8 @@ class HomeViewModel extends BaseViewModel {
 
   void filterCryptosByInputUser(String input) {
     final inputLowerCase = input.toLowerCase();
-    filteredCryptosCurrencies =
-        allCryptosCurrencies
+    filteredCryptos =
+        allCryptos
             .where(
               (crypto) => crypto.name.toLowerCase().startsWith(inputLowerCase),
             )
@@ -64,10 +64,9 @@ class HomeViewModel extends BaseViewModel {
       setState(ViewState.loading);
       _currency = currency;
       selectedFilter = HomeFilterCrypto.all;
-      allCryptosCurrencies = await datasource.getCryptos(currency);
-      filteredCryptosCurrencies = allCryptosCurrencies;
+      allCryptos = await datasource.getCryptos(currency);
+      filteredCryptos = allCryptos;
       setState(ViewState.success);
-      notifyListeners();
     } catch (error) {
       setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');
     }

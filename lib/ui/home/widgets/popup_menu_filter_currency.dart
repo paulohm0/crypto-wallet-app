@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 
 class PopupMenuFilterCurrency extends StatefulWidget {
   final void Function(Currency) onSelected;
-  const PopupMenuFilterCurrency({super.key, required this.onSelected});
+  final Currency initialCurrency;
+
+  const PopupMenuFilterCurrency({
+    super.key,
+    required this.onSelected,
+    this.initialCurrency = Currency.BRL,
+  });
 
   @override
   State<PopupMenuFilterCurrency> createState() =>
@@ -11,7 +17,34 @@ class PopupMenuFilterCurrency extends StatefulWidget {
 }
 
 class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
-  Currency _selectedCurrency = Currency.BRL;
+  late Currency _selectedCurrency;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedCurrency = widget.initialCurrency;
+  }
+
+  Widget _buildButton() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: const Color(0xFFFEB83D), width: 0.6),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
+            style: const TextStyle(color: Colors.white, fontSize: 12),
+          ),
+          const SizedBox(width: 4),
+          const Icon(Icons.arrow_drop_down, color: Color(0xFFFEB83D)),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,29 +65,13 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
             value: currency.code,
             child: Text(
               '${currency.flagEmoji} ${currency.name}',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           );
         }).toList();
       },
       color: const Color(0xFF2A2A2A),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(color: const Color(0xFFFEB83D), width: 0.6),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
-              style: const TextStyle(color: Colors.white, fontSize: 12),
-            ),
-            const Icon(Icons.arrow_drop_down, color: Color(0xFFFEB83D)),
-          ],
-        ),
-      ),
+      child: _buildButton(),
     );
   }
 }

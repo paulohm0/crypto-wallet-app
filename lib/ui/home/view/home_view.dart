@@ -88,12 +88,10 @@ class HomeView extends StatelessWidget {
                                 separatorBuilder: (context, index) {
                                   return const Divider(color: Colors.white10);
                                 },
-                                itemCount:
-                                    viewModel.filteredCryptosCurrencies.length,
+                                itemCount: viewModel.filteredCryptos.length,
                                 itemBuilder: (context, index) {
                                   final crypto =
-                                      viewModel
-                                          .filteredCryptosCurrencies[index];
+                                      viewModel.filteredCryptos[index];
                                   return CryptoItemHome(
                                     name: crypto.name,
                                     currencySymbol:
