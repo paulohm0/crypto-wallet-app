@@ -27,32 +27,6 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
     _selectedCurrency = widget.initialCurrency;
   }
 
-  Widget _buildButton() {
-    return Container(
-      height: 24,
-      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-      decoration: BoxDecoration(
-        color: AppColors.greyBackground,
-        borderRadius: BorderRadius.circular(6.0),
-        border: Border.all(color: AppColors.primary, width: 0.8),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
-            style: const TextStyle(
-              color: AppColors.white,
-              fontSize: AppFontSizes.ss,
-            ),
-          ),
-          const SizedBox(width: 4),
-          const Icon(Icons.arrow_drop_down, color: AppColors.primary),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
@@ -83,6 +57,32 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
       },
       color: AppColors.greyBackground,
       child: _buildButton(),
+    );
+  }
+
+  Widget _buildButton() {
+    return Container(
+      height: 24,
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+      decoration: BoxDecoration(
+        color: AppColors.greyBackground,
+        borderRadius: BorderRadius.circular(6.0),
+        border: Border.all(color: AppColors.primary, width: 0.8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
+            style: const TextStyle(
+              color: AppColors.white,
+              fontSize: AppFontSizes.ss,
+            ),
+          ),
+          const SizedBox(width: 4),
+          const Icon(Icons.arrow_drop_down, color: AppColors.primary),
+        ],
+      ),
     );
   }
 }

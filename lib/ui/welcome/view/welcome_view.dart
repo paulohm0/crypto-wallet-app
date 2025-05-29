@@ -93,8 +93,8 @@ class WelcomeView extends StatelessWidget {
                         child: Text(
                           'Começar',
                           style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: AppFontSizes.xs,
+                            color: AppColors.black,
+                            fontSize: AppFontSizes.sm,
                             fontWeight: AppFontWeights.bold,
                           ),
                         ),
