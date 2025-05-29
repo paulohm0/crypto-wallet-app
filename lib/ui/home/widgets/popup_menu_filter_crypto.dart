@@ -1,3 +1,6 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
+import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:flutter/material.dart';
 
 enum HomeFilterCrypto {
@@ -30,8 +33,8 @@ class PopupMenuFilterCrypto extends StatelessWidget {
                   label: Text(
                     segment.label,
                     style: const TextStyle(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w700,
+                      fontSize: AppFontSizes.ss,
+                      fontWeight: AppFontWeights.bold,
                     ),
                   ),
                 ),
@@ -52,20 +55,20 @@ ButtonStyle _segmentedButtonStyle() {
     backgroundColor: WidgetStateProperty.resolveWith<Color?>(
       (states) =>
           states.contains(WidgetState.selected)
-              ? const Color(0xFFFEB83D)
-              : const Color(0xFF1E1E1E),
+              ? AppColors.primary
+              : AppColors.greyBackground,
     ),
     foregroundColor: WidgetStateProperty.resolveWith<Color?>(
       (states) =>
           states.contains(WidgetState.selected)
-              ? Colors.black
-              : const Color(0xFFFEB83D),
+              ? AppColors.black
+              : AppColors.primary,
     ),
     shape: WidgetStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
     ),
     side: WidgetStateProperty.all(
-      const BorderSide(color: Color(0xFFFEB83D), width: 0.8),
+      const BorderSide(color: AppColors.primary, width: 0.8),
     ),
     padding: WidgetStateProperty.all(
       const EdgeInsets.symmetric(horizontal: 8, vertical: 2),

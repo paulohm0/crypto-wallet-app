@@ -1,3 +1,5 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/data/models/currency.dart';
 import 'package:flutter/material.dart';
 
@@ -30,19 +32,22 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
       height: 24,
       padding: const EdgeInsets.symmetric(horizontal: 6.0),
       decoration: BoxDecoration(
-        color: Color(0xFF1E1E1E),
+        color: AppColors.greyBackground,
         borderRadius: BorderRadius.circular(6.0),
-        border: Border.all(color: const Color(0xFFFEB83D), width: 0.8),
+        border: Border.all(color: AppColors.primary, width: 0.8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             '${_selectedCurrency.flagEmoji} ${_selectedCurrency.name} (${_selectedCurrency.code})',
-            style: const TextStyle(color: Colors.white, fontSize: 9),
+            style: const TextStyle(
+              color: AppColors.white,
+              fontSize: AppFontSizes.ss,
+            ),
           ),
           const SizedBox(width: 4),
-          const Icon(Icons.arrow_drop_down, color: Color(0xFFFEB83D)),
+          const Icon(Icons.arrow_drop_down, color: AppColors.primary),
         ],
       ),
     );
@@ -68,12 +73,15 @@ class _PopupMenuFilterCurrencyState extends State<PopupMenuFilterCurrency> {
             value: currency.code,
             child: Text(
               '${currency.flagEmoji} ${currency.name}',
-              style: const TextStyle(color: Colors.white, fontSize: 10),
+              style: const TextStyle(
+                color: AppColors.white,
+                fontSize: AppFontSizes.sss,
+              ),
             ),
           );
         }).toList();
       },
-      color: const Color(0xFF2A2A2A),
+      color: AppColors.greyBackground,
       child: _buildButton(),
     );
   }

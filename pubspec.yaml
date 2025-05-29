@@ -27,10 +27,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/splash.png
-    - assets/images/logo.png
-    - assets/images/graph.png
-    - assets/images/default_icon_image.jpg
+    - assets/images/crypto_wallet_icon_splash.png
+    - assets/images/crypto_default_icon_image.jpg
+    - assets/images/crypto_wallet_icon_welcome.png
 
   fonts:
     - family: Montserrat
@@ -50,10 +49,10 @@ flutter:
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/images/splash.png
+  image: assets/images/crypto_wallet_icon_splash.png
 
   android_12:
-    image: assets/images/splash.png
+    image: assets/images/crypto_wallet_icon_splash.png
     icon_background_color: "#000000"
     color: "#000000"
 

@@ -1,3 +1,4 @@
+import 'package:crypto_wallet/core/theme/app_theme.dart';
 import 'package:crypto_wallet/ui/home/view/home_view.dart';
 import 'package:crypto_wallet/ui/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,7 @@ class CryptoWalletApp extends StatelessWidget {
     return MaterialApp(
       title: 'Crypto Wallet',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-        scaffoldBackgroundColor: Colors.black,
-      ),
+      theme: AppTheme.theme,
       initialRoute: '/welcome',
       routes: {
         '/welcome': (context) => WelcomeView(),

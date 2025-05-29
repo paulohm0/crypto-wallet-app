@@ -1,3 +1,5 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/data/models/currency.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
@@ -30,20 +32,23 @@ class HomeView extends StatelessWidget {
                     decoration: InputDecoration(
                       counterText: '',
                       hintText: 'Buscar por moeda',
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: AppColors.grey),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide.none,
                       ),
                       filled: true,
-                      fillColor: Color(0xFF1E1E1E),
+                      fillColor: AppColors.greyBackground,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 8.0,
                         vertical: 6.0,
                       ),
                       constraints: const BoxConstraints(maxHeight: 35.0),
                     ),
-                    style: const TextStyle(fontSize: 12, color: Colors.white),
+                    style: const TextStyle(
+                      fontSize: AppFontSizes.xs,
+                      color: AppColors.white,
+                    ),
                     onChanged: (value) {
                       viewModel.filterCryptosByInputUser(value);
                     },
@@ -72,21 +77,27 @@ class HomeView extends StatelessWidget {
                     children: [
                       Text(
                         'Criptomoedas disponíveis',
-                        style: TextStyle(color: Colors.white, fontSize: 8),
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: AppFontSizes.xx,
+                        ),
                       ),
                       Text(
                         'Cotação / Última hora',
-                        style: TextStyle(color: Colors.white, fontSize: 8),
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: AppFontSizes.xx,
+                        ),
                       ),
                     ],
                   ),
-                  Divider(color: Colors.white10),
+                  Divider(color: AppColors.divider),
                   Expanded(
                     child:
                         viewModel.state == ViewState.loading
                             ? const Center(
                               child: CircularProgressIndicator(
-                                color: Color(0xFFFEB83D),
+                                color: AppColors.primary,
                                 strokeWidth: 2.0,
                               ),
                             )
@@ -94,7 +105,7 @@ class HomeView extends StatelessWidget {
                               physics: const ClampingScrollPhysics(),
                               shrinkWrap: false,
                               separatorBuilder: (context, index) {
-                                return const Divider(color: Colors.white10);
+                                return const Divider(color: AppColors.divider);
                               },
                               itemCount: viewModel.filteredCryptos.length,
                               itemBuilder: (context, index) {

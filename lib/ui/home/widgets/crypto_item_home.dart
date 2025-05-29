@@ -1,3 +1,6 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
+import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +31,7 @@ class CryptoItemHome extends StatelessWidget {
           height: 30,
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
-              'assets/images/default_icon_image.jpg',
+              'assets/images/crypto_default_icon_image.jpg',
               width: 30,
               height: 30,
               fit: BoxFit.cover,
@@ -47,14 +50,17 @@ class CryptoItemHome extends StatelessWidget {
                 name,
                 maxLines: 1,
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  fontSize: AppFontSizes.sss,
+                  fontWeight: AppFontWeights.bold,
+                  color: AppColors.white,
                 ),
               ),
               Text(
                 symbol,
-                style: TextStyle(fontSize: 10, color: Colors.grey[400]),
+                style: TextStyle(
+                  fontSize: AppFontSizes.sss,
+                  color: AppColors.grey,
+                ),
               ),
             ],
           ),
@@ -68,37 +74,45 @@ class CryptoItemHome extends StatelessWidget {
               Text(
                 amount.toCurrency(currencySymbol),
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  fontSize: AppFontSizes.sss,
+                  fontWeight: AppFontWeights.bold,
+                  color: AppColors.white,
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   percentChangeLastHour < 0
-                      ? Icon(Icons.arrow_downward, color: Colors.red, size: 12)
+                      ? Icon(
+                        Icons.arrow_downward,
+                        color: AppColors.red,
+                        size: AppFontSizes.xs,
+                      )
                       : percentChangeLastHour == 0.0
                       ? SizedBox()
-                      : Icon(Icons.arrow_upward, color: Colors.green, size: 12),
+                      : Icon(
+                        Icons.arrow_upward,
+                        color: AppColors.green,
+                        size: AppFontSizes.xs,
+                      ),
                   percentChangeLastHour == 0.0
                       ? Text(
                         'Não Informado',
                         style: TextStyle(
-                          fontSize: 8,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
+                          fontSize: AppFontSizes.xx,
+                          fontWeight: AppFontWeights.bold,
+                          color: AppColors.grey,
                         ),
                       )
                       : Text(
                         '${percentChangeLastHour.toStringAsFixed(5)} %',
                         style: TextStyle(
-                          fontSize: 8,
-                          fontWeight: FontWeight.bold,
+                          fontSize: AppFontSizes.xx,
+                          fontWeight: AppFontWeights.bold,
                           color:
                               percentChangeLastHour < 0
-                                  ? Colors.red
-                                  : Colors.green,
+                                  ? AppColors.red
+                                  : AppColors.green,
                         ),
                       ),
                 ],

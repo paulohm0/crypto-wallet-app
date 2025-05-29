@@ -1,3 +1,6 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
+import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -8,94 +11,97 @@ class WelcomeView extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        color: Colors.black,
+        color: AppColors.black,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
+              SizedBox(height: 8.0),
+              Column(
                 children: [
-                  Image.asset(
-                    'assets/images/logo/logo.png',
-                    height: 200,
-                    width: 200,
+                  SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: Image.asset(
+                      'assets/images/crypto_wallet_icon_welcome.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 96.0),
-                    child: ShaderMask(
-                      shaderCallback: (rect) {
-                        return LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: [Color(0xFF222222), Colors.transparent],
-                          stops: [0.4, 1.0],
-                        ).createShader(
-                          Rect.fromLTRB(0, 0, rect.width, rect.height),
-                        );
-                      },
-                      blendMode: BlendMode.dstIn,
-                      child: SizedBox(
-                        height: 300,
-                        width: 300,
-                        child: Image.asset(
-                          'assets/images/graph.png',
-                          fit: BoxFit.fill,
-                        ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Crypto',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: AppFontSizes.xll,
+                              fontWeight: AppFontWeights.medium,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Wallet',
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              fontSize: AppFontSizes.xll,
+                              fontWeight: AppFontWeights.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ],
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Eleve o nível do seu portfólio cripto.',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
+                      color: AppColors.white,
+                      fontSize: AppFontSizes.lg,
+                      fontWeight: AppFontWeights.bold,
                     ),
-                    textAlign: TextAlign.start,
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 8.0),
                   Text(
                     'O mundo das criptomoedas em um só lugar.',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      color: AppColors.white,
+                      fontSize: AppFontSizes.xs,
                     ),
                     textAlign: TextAlign.start,
                   ),
-                ],
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/home');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFEB83D),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0),
-                    child: Text(
-                      'Começar',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                  SizedBox(height: 24.0),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/home');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Text(
+                          'Começar',
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: AppFontSizes.xs,
+                            fontWeight: AppFontWeights.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
