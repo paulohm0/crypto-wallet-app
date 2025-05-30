@@ -4,8 +4,8 @@ import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final CryptoDatasource datasource;
-  HomeViewModel(this.datasource) {
+  final CryptoDatasource cryptoDatasource;
+  HomeViewModel(this.cryptoDatasource) {
     _currency = 'BRL';
     fetchCryptoCurrencies(_currency);
   }
@@ -64,7 +64,7 @@ class HomeViewModel extends BaseViewModel {
       setState(ViewState.loading);
       _currency = currency;
       selectedFilter = HomeFilterCrypto.all;
-      allCryptos = await datasource.getCryptos(currency);
+      allCryptos = await cryptoDatasource.getCryptos(currency);
       filteredCryptos =
           allCryptos
               .where((crypto) => crypto.latestPrice.amount.amount != '0.00')

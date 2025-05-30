@@ -114,17 +114,12 @@ class HomeView extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final crypto = viewModel.filteredCryptos[index];
                                 return CryptoItemHome(
-                                  name: crypto.name,
                                   currencySymbol:
                                       Currency.fromCode(
                                         viewModel.currency,
                                       )?.sifra ??
                                       '?',
-                                  symbol: crypto.symbol,
-                                  iconAssetPath: crypto.imageUrl,
-                                  amount: crypto.latestPrice.amount.amount,
-                                  percentChangeLastHour:
-                                      crypto.latestPrice.percentChange.hour,
+                                  crypto: crypto,
                                 );
                               },
                             ),

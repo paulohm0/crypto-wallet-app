@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/core/theme/app_theme.dart';
+import 'package:crypto_wallet/ui/buy_crypto/view/buy_crypto_view.dart';
 import 'package:crypto_wallet/ui/home/view/home_view.dart';
 import 'package:crypto_wallet/ui/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class CryptoWalletApp extends StatelessWidget {
       routes: {
         '/welcome': (context) => WelcomeView(),
         '/home': (context) => HomeView(),
+        '/buy': (context) => BuyCryptoView(),
       },
     );
   }

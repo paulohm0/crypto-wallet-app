@@ -1,5 +1,5 @@
 class CryptoModel {
-  final String? id;
+  final String id;
   final String symbol;
   final String name;
   final String? color;

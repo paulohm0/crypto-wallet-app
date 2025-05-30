@@ -2,37 +2,32 @@ import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
+import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/shared/widgets/percent_change_indicator.dart';
 import 'package:flutter/material.dart';
 
 class CryptoItemHome extends StatelessWidget {
-  final String iconAssetPath;
-  final String name;
-  final String symbol;
-  final String amount;
-  final double percentChangeLastHour;
+  final CryptoModel crypto;
   final String currencySymbol;
   const CryptoItemHome({
     super.key,
-    required this.name,
-    required this.symbol,
-    required this.iconAssetPath,
-    required this.amount,
-    required this.percentChangeLastHour,
+    required this.crypto,
     required this.currencySymbol,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, '/buy', arguments: crypto);
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
             ClipOval(
               child: Image.network(
-                iconAssetPath,
+                crypto.imageUrl,
                 width: 30,
                 height: 30,
                 errorBuilder: (context, error, stackTrace) {
@@ -53,7 +48,7 @@ class CryptoItemHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    name,
+                    crypto.name,
                     maxLines: 1,
                     style: TextStyle(
                       fontSize: AppFontSizes.sss,
@@ -62,7 +57,7 @@ class CryptoItemHome extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    symbol,
+                    crypto.symbol,
                     style: TextStyle(
                       fontSize: AppFontSizes.sss,
                       color: AppColors.grey,
@@ -78,7 +73,7 @@ class CryptoItemHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    amount.toCurrency(currencySymbol),
+                    crypto.latestPrice.amount.amount.toCurrency(currencySymbol),
                     style: TextStyle(
                       fontSize: AppFontSizes.sss,
                       fontWeight: AppFontWeights.bold,
@@ -86,7 +81,8 @@ class CryptoItemHome extends StatelessWidget {
                     ),
                   ),
                   PercentChangeIndicator(
-                    percentChangeLastHour: percentChangeLastHour,
+                    percentChangeLastHour:
+                        crypto.latestPrice.percentChange.hour,
                   ),
                 ],
               ),

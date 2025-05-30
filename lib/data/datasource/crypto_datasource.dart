@@ -8,7 +8,10 @@ class CryptoDatasource {
 
   Future<List<CryptoModel>> getCryptos(String currency) async {
     try {
-      final response = await dio.get(currency);
+      final response = await dio.get(
+        '/v2/assets/search',
+        queryParameters: {'base': currency},
+      );
       final List<dynamic> data = response.data['data'];
       return data.map((e) => CryptoModel.fromJson(e)).toList();
     } on DioException catch (error) {
