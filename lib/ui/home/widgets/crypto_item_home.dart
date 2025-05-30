@@ -24,70 +24,76 @@ class CryptoItemHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ClipOval(
-          child: Image.network(
-            iconAssetPath,
-            width: 30,
-            height: 30,
-            errorBuilder: (context, error, stackTrace) {
-              return Image.asset(
-                'assets/images/crypto_default_icon_image.jpg',
+    return InkWell(
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          children: [
+            ClipOval(
+              child: Image.network(
+                iconAssetPath,
                 width: 30,
                 height: 30,
-                fit: BoxFit.cover,
-              );
-            },
-          ),
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/images/crypto_default_icon_image.jpg',
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.sss,
+                      fontWeight: AppFontWeights.bold,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  Text(
+                    symbol,
+                    style: TextStyle(
+                      fontSize: AppFontSizes.sss,
+                      color: AppColors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    amount.toCurrency(currencySymbol),
+                    style: TextStyle(
+                      fontSize: AppFontSizes.sss,
+                      fontWeight: AppFontWeights.bold,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  PercentChangeIndicator(
+                    percentChangeLastHour: percentChangeLastHour,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                name,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: AppFontSizes.sss,
-                  fontWeight: AppFontWeights.bold,
-                  color: AppColors.white,
-                ),
-              ),
-              Text(
-                symbol,
-                style: TextStyle(
-                  fontSize: AppFontSizes.sss,
-                  color: AppColors.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                amount.toCurrency(currencySymbol),
-                style: TextStyle(
-                  fontSize: AppFontSizes.sss,
-                  fontWeight: AppFontWeights.bold,
-                  color: AppColors.white,
-                ),
-              ),
-              PercentChangeIndicator(
-                percentChangeLastHour: percentChangeLastHour,
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

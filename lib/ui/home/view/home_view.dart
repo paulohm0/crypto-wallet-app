@@ -1,6 +1,6 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
-import 'package:crypto_wallet/data/models/currency.dart';
+import 'package:crypto_wallet/data/currency.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/ui/home/view_model/home_view_model.dart';
@@ -105,7 +105,10 @@ class HomeView extends StatelessWidget {
                               physics: const ClampingScrollPhysics(),
                               shrinkWrap: false,
                               separatorBuilder: (context, index) {
-                                return const Divider(color: AppColors.divider);
+                                return const Divider(
+                                  color: AppColors.divider,
+                                  height: 0.5,
+                                );
                               },
                               itemCount: viewModel.filteredCryptos.length,
                               itemBuilder: (context, index) {
