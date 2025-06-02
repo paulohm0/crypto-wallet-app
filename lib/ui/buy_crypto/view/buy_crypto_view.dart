@@ -14,14 +14,12 @@ class BuyCryptoView extends StatefulWidget {
 
 class _BuyCryptoViewState extends State<BuyCryptoView> {
   late BuyCryptoViewModel viewModel;
-  late BuyCryptoViewModel viewModel2;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final args = ModalRoute.of(context)!.settings.arguments as CryptoModel;
     viewModel = context.read<BuyCryptoViewModel>();
-    viewModel2 = context.read<BuyCryptoViewModel>();
     viewModel.fetchCryptoPricesToChart(args.id, 'BRL');
   }
 
