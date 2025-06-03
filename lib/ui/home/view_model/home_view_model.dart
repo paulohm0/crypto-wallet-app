@@ -73,6 +73,5 @@ class HomeViewModel extends BaseViewModel {
     } catch (error) {
       setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');
     }
-    notifyListeners();
   }
 }

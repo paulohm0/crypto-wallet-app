@@ -27,7 +27,11 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCustom(),
-      body: CryptoChart(spots: viewModel.spots),
+      body: Consumer<BuyCryptoViewModel>(
+        builder: (context, viewModel, _) {
+          return CryptoChart(spots: viewModel.spots);
+        },
+      ),
     );
   }
 }
