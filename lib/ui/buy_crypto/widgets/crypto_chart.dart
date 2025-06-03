@@ -18,7 +18,7 @@ class CryptoChart extends StatelessWidget {
     final maxY = spots.map((e) => e.y).reduce((a, b) => a > b ? a : b);
 
     return SizedBox(
-      height: 300,
+      height: 200,
       width: 400,
       child: Padding(
         padding: const EdgeInsets.all(16.0),

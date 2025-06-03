@@ -4,7 +4,7 @@ class CryptoModel {
   final String name;
   final String? color;
   final String imageUrl;
-  final String? currency;
+  final String currency;
   final double percentChange;
   final LatestPrice latestPrice;
 
@@ -28,7 +28,7 @@ class CryptoModel {
       imageUrl:
           json['image_url'] ??
           'https://i.pinimg.com/736x/fd/0a/78/fd0a7888a1165a085fabf22a1ac3fd41.jpg',
-      currency: json['currency'],
+      currency: json['currency'] ?? 'BRL',
       percentChange: (json['percent_change'] as num?)?.toDouble() ?? 0.0,
       latestPrice:
           json['latest_price'] == null

@@ -6,6 +6,13 @@ import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/shared/widgets/percent_change_indicator.dart';
 import 'package:flutter/material.dart';
 
+class BuyCryptoArguments {
+  final CryptoModel crypto;
+  final String currencySymbol;
+
+  BuyCryptoArguments({required this.crypto, required this.currencySymbol});
+}
+
 class CryptoItemHome extends StatelessWidget {
   final CryptoModel crypto;
   final String currencySymbol;
@@ -19,7 +26,14 @@ class CryptoItemHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/buy', arguments: crypto);
+        Navigator.pushNamed(
+          context,
+          '/buy',
+          arguments: BuyCryptoArguments(
+            crypto: crypto,
+            currencySymbol: currencySymbol,
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -82,7 +96,7 @@ class CryptoItemHome extends StatelessWidget {
                   ),
                   PercentChangeIndicator(
                     percentChangeLastHour:
-                        crypto.latestPrice.percentChange.hour,
+                        crypto.latestPrice.percentChange.hour * 100,
                   ),
                 ],
               ),

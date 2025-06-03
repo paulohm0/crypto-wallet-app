@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 enum HomeFilterCrypto {
   high('↑ Alta'),
   low('↓ Baixa'),
-  all('All');
+  all('Todos');
 
   final String label;
   const HomeFilterCrypto(this.label);

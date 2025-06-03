@@ -50,12 +50,14 @@ class Prices {
 }
 
 class PriceData {
+  final double percentChange;
   final List<PricePoint> prices;
 
-  PriceData({required this.prices});
+  PriceData({required this.prices, required this.percentChange});
 
   factory PriceData.fromJson(Map<String, dynamic> json) {
     return PriceData(
+      percentChange: json['percent_change'] ?? 0.0,
       prices:
           (json['prices'] as List)
               .map((price) => PricePoint.fromList(price))
