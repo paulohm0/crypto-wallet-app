@@ -4,6 +4,7 @@ class CryptoModel {
   final String name;
   final String? color;
   final String imageUrl;
+  final String description;
   final String currency;
   final double percentChange;
   final LatestPrice latestPrice;
@@ -17,6 +18,7 @@ class CryptoModel {
     required this.currency,
     required this.percentChange,
     required this.latestPrice,
+    required this.description,
   });
 
   factory CryptoModel.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class CryptoModel {
       imageUrl:
           json['image_url'] ??
           'https://i.pinimg.com/736x/fd/0a/78/fd0a7888a1165a085fabf22a1ac3fd41.jpg',
+      description: json['description'] ?? 'Sem Informações',
       currency: json['currency'] ?? 'BRL',
       percentChange: (json['percent_change'] as num?)?.toDouble() ?? 0.0,
       latestPrice:
