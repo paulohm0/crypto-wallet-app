@@ -80,6 +80,9 @@ class _HomeViewState extends State<HomeView> {
                         PopupMenuFilterCurrency(
                           onSelected: (Currency currency) {
                             viewModel.fetchCryptoCurrencies(currency.code);
+                            viewModel.filterCryptosByFilter(
+                              HomeFilterCrypto.all,
+                            );
                           },
                         ),
                       ],

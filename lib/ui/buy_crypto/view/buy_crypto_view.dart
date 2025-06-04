@@ -43,10 +43,12 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: Image.network(selectedCrypto.crypto.imageUrl),
+                    ClipOval(
+                      child: SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: Image.network(selectedCrypto.crypto.imageUrl),
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

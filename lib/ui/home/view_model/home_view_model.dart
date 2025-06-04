@@ -66,9 +66,11 @@ class HomeViewModel extends BaseViewModel {
       selectedFilter = HomeFilterCrypto.all;
       allCryptos = await cryptoDatasource.getCryptos(currency);
       filteredCryptos =
-          allCryptos
-              .where((crypto) => crypto.latestPrice.amount.amount != '0.00')
-              .toList();
+          allCryptos.where((crypto) {
+            final amount =
+                double.tryParse(crypto.latestPrice.amount.amount) ?? 0.0;
+            return amount >= 0.01;
+          }).toList();
       setState(ViewState.success);
     } catch (error) {
       setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');
