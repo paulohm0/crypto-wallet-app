@@ -65,6 +65,7 @@ class HomeViewModel extends BaseViewModel {
       _currency = currency;
       selectedFilter = HomeFilterCrypto.all;
       allCryptos = await cryptoDatasource.getCryptos(currency);
+
       filteredCryptos =
           allCryptos.where((crypto) {
             final amount =

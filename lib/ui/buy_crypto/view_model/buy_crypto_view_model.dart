@@ -43,7 +43,6 @@ class BuyCryptoViewModel extends BaseViewModel {
             final relativeTime = (price.timestamp - firstTimestamp).toDouble();
             return FlSpot(relativeTime, price.price);
           }).toList();
-
       _lastCryptoId = idCrypto;
       _lastCurrency = currency;
 

@@ -16,6 +16,7 @@ class BuyCryptoArguments {
 class CryptoItemHome extends StatelessWidget {
   final CryptoModel crypto;
   final String currencySymbol;
+
   const CryptoItemHome({
     super.key,
     required this.crypto,

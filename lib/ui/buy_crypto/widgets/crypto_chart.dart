@@ -21,15 +21,21 @@ class CryptoChart extends StatelessWidget {
       height: 200,
       width: 400,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: LineChart(
           LineChartData(
             lineBarsData: [
               LineChartBarData(
+                isCurved: true,
+                curveSmoothness: 0.2,
                 spots: spots,
-                barWidth: 1,
+                barWidth: 1.0,
                 color: AppColors.primary,
                 dotData: FlDotData(show: false),
+                belowBarData: BarAreaData(
+                  show: true,
+                  color: AppColors.primary.withAlpha(25),
+                ),
               ),
             ],
             titlesData: FlTitlesData(
