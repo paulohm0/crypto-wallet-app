@@ -21,8 +21,8 @@ class WelcomeView extends StatelessWidget {
               Column(
                 children: [
                   SizedBox(
-                    height: 300,
-                    width: 300,
+                    height: 200,
+                    width: 200,
                     child: Image.asset(
                       'assets/images/crypto_wallet_icon_welcome.png',
                       fit: BoxFit.contain,
