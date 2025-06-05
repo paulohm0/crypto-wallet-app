@@ -5,6 +5,7 @@ import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/ui/home/view_model/home_view_model.dart';
 import 'package:crypto_wallet/ui/home/widgets/crypto_item_home.dart';
+import 'package:crypto_wallet/ui/home/widgets/loading_list.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_currency.dart';
 import 'package:flutter/material.dart';
@@ -128,12 +129,7 @@ class _HomeViewState extends State<HomeView> {
                       },
                       child:
                           viewModel.state == ViewState.loading
-                              ? const Center(
-                                child: CircularProgressIndicator(
-                                  color: AppColors.primary,
-                                  strokeWidth: 2.0,
-                                ),
-                              )
+                              ? const LoadingList()
                               : ListView.separated(
                                 physics: const ClampingScrollPhysics(),
                                 shrinkWrap: false,
