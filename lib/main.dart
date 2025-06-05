@@ -1,10 +1,10 @@
+import 'package:crypto_wallet/core/dependency%20injection/setup_providers.dart';
 import 'package:crypto_wallet/core/theme/app_theme.dart';
+import 'package:crypto_wallet/core/utils/keyboard_focus.dart';
 import 'package:crypto_wallet/ui/buy_crypto/view/buy_crypto_view.dart';
 import 'package:crypto_wallet/ui/home/view/home_view.dart';
 import 'package:crypto_wallet/ui/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
-
-import 'core/dependency injection/setup_providers.dart';
 
 void main() {
   runApp(setupProviders(child: const CryptoWalletApp()));
@@ -18,6 +18,7 @@ class CryptoWalletApp extends StatelessWidget {
     return MaterialApp(
       title: 'Crypto Wallet',
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [KeyboardDismissObserver()],
       theme: AppTheme.theme,
       initialRoute: '/welcome',
       routes: {

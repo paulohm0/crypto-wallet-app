@@ -28,7 +28,6 @@ class _HomeViewState extends State<HomeView> {
     super.didChangeDependencies();
     if (!_isInit) return;
     _isInit = false;
-
     viewModel = context.read<HomeViewModel>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       viewModel.fetchCryptoCurrencies(viewModel.currency, context);
@@ -38,6 +37,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final RefreshController refreshController = RefreshController();
+
     return Scaffold(
       appBar: AppBarCustom(),
       body: Consumer<HomeViewModel>(
