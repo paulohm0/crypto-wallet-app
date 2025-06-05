@@ -2,21 +2,22 @@ import 'package:crypto_wallet/data/datasource/crypto_datasource.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeViewModel extends BaseViewModel {
   final CryptoDatasource cryptoDatasource;
-  HomeViewModel(this.cryptoDatasource) {
-    _currency = 'BRL';
-    fetchCryptoCurrencies(_currency);
-  }
+  HomeViewModel(this.cryptoDatasource);
 
   List<CryptoModel> allCryptos = [];
   List<CryptoModel> filteredCryptos = [];
 
-  late String _currency;
+  String _currency = 'BRL';
   String get currency => _currency;
 
   HomeFilterCrypto selectedFilter = HomeFilterCrypto.all;
+
+  bool _allImagesPrecached = false;
+  bool get allImagesPrecached => _allImagesPrecached;
 
   void filterCryptosByFilter(HomeFilterCrypto label) {
     selectedFilter = label;
@@ -30,8 +31,9 @@ class HomeViewModel extends BaseViewModel {
                 .where((crypto) => crypto.latestPrice.percentChange.hour > 0)
                 .toList()
               ..sort(
-                (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
-                    .compareTo(cryptoA.latestPrice.percentChange.hour),
+                (a, b) => b.latestPrice.percentChange.hour.compareTo(
+                  a.latestPrice.percentChange.hour,
+                ),
               );
         break;
       case HomeFilterCrypto.low:
@@ -40,8 +42,9 @@ class HomeViewModel extends BaseViewModel {
                 .where((crypto) => crypto.latestPrice.percentChange.hour < 0)
                 .toList()
               ..sort(
-                (cryptoA, cryptoB) => cryptoB.latestPrice.percentChange.hour
-                    .compareTo(cryptoA.latestPrice.percentChange.hour),
+                (a, b) => b.latestPrice.percentChange.hour.compareTo(
+                  a.latestPrice.percentChange.hour,
+                ),
               );
         break;
     }
@@ -59,12 +62,26 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> fetchCryptoCurrencies(String currency) async {
+  Future<void> fetchCryptoCurrencies(
+    String currency,
+    BuildContext context,
+  ) async {
     try {
-      setState(ViewState.loading);
       _currency = currency;
+      setState(ViewState.loading);
       selectedFilter = HomeFilterCrypto.all;
-      allCryptos = await cryptoDatasource.getCryptos(currency);
+      _allImagesPrecached = false;
+
+      allCryptos = await cryptoDatasource.getCryptos(_currency);
+
+      await Future.wait(
+        allCryptos.map((crypto) async {
+          final image = NetworkImage(crypto.imageUrl);
+          await precacheImage(image, context);
+        }),
+      );
+
+      _allImagesPrecached = true;
 
       filteredCryptos =
           allCryptos.where((crypto) {
@@ -72,9 +89,10 @@ class HomeViewModel extends BaseViewModel {
                 double.tryParse(crypto.latestPrice.amount.amount) ?? 0.0;
             return amount >= 0.01;
           }).toList();
+
       setState(ViewState.success);
     } catch (error) {
-      setState(ViewState.error, 'Não foi possivel buscar as Criptomoedas');
+      setState(ViewState.error, 'Não foi possível buscar as Criptomoedas');
     }
   }
 }

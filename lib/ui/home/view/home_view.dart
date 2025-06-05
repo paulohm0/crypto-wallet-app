@@ -18,12 +18,19 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  bool _isInit = true;
   late HomeViewModel viewModel;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!_isInit) return;
+    _isInit = false;
+
     viewModel = context.read<HomeViewModel>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.fetchCryptoCurrencies(viewModel.currency, context);
+    });
   }
 
   @override
@@ -79,7 +86,10 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         PopupMenuFilterCurrency(
                           onSelected: (Currency currency) {
-                            viewModel.fetchCryptoCurrencies(currency.code);
+                            viewModel.fetchCryptoCurrencies(
+                              currency.code,
+                              context,
+                            );
                             viewModel.filterCryptosByFilter(
                               HomeFilterCrypto.all,
                             );
@@ -109,36 +119,45 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Divider(color: AppColors.divider),
                   Expanded(
-                    child:
-                        viewModel.state == ViewState.loading
-                            ? const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primary,
-                                strokeWidth: 2.0,
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      switchInCurve: Curves.easeOut,
+                      switchOutCurve: Curves.easeIn,
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                      child:
+                          viewModel.state == ViewState.loading
+                              ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primary,
+                                  strokeWidth: 2.0,
+                                ),
+                              )
+                              : ListView.separated(
+                                physics: const ClampingScrollPhysics(),
+                                shrinkWrap: false,
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    color: AppColors.divider,
+                                    height: 0.5,
+                                  );
+                                },
+                                itemCount: viewModel.filteredCryptos.length,
+                                itemBuilder: (context, index) {
+                                  final crypto =
+                                      viewModel.filteredCryptos[index];
+                                  return CryptoItemHome(
+                                    currencySymbol:
+                                        Currency.fromCode(
+                                          viewModel.currency,
+                                        )?.sifra ??
+                                        '?',
+                                    crypto: crypto,
+                                  );
+                                },
                               ),
-                            )
-                            : ListView.separated(
-                              physics: const ClampingScrollPhysics(),
-                              shrinkWrap: false,
-                              separatorBuilder: (context, index) {
-                                return const Divider(
-                                  color: AppColors.divider,
-                                  height: 0.5,
-                                );
-                              },
-                              itemCount: viewModel.filteredCryptos.length,
-                              itemBuilder: (context, index) {
-                                final crypto = viewModel.filteredCryptos[index];
-                                return CryptoItemHome(
-                                  currencySymbol:
-                                      Currency.fromCode(
-                                        viewModel.currency,
-                                      )?.sifra ??
-                                      '?',
-                                  crypto: crypto,
-                                );
-                              },
-                            ),
+                    ),
                   ),
                 ],
               ),
