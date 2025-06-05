@@ -10,6 +10,7 @@ import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
 import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -36,6 +37,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final RefreshController refreshController = RefreshController();
     return Scaffold(
       appBar: AppBarCustom(),
       body: Consumer<HomeViewModel>(
@@ -130,28 +132,39 @@ class _HomeViewState extends State<HomeView> {
                       child:
                           viewModel.state == ViewState.loading
                               ? const LoadingList()
-                              : ListView.separated(
-                                physics: const ClampingScrollPhysics(),
-                                shrinkWrap: false,
-                                separatorBuilder: (context, index) {
-                                  return const Divider(
-                                    color: AppColors.divider,
-                                    height: 0.5,
-                                  );
+                              : SmartRefresher(
+                                controller: refreshController,
+                                onRefresh: () async {
+                                  viewModel.refreshCryptoCurrencies(context);
+                                  refreshController.refreshCompleted();
                                 },
-                                itemCount: viewModel.filteredCryptos.length,
-                                itemBuilder: (context, index) {
-                                  final crypto =
-                                      viewModel.filteredCryptos[index];
-                                  return CryptoItemHome(
-                                    currencySymbol:
-                                        Currency.fromCode(
-                                          viewModel.currency,
-                                        )?.sifra ??
-                                        '?',
-                                    crypto: crypto,
-                                  );
-                                },
+                                header: MaterialClassicHeader(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                ),
+                                child: ListView.separated(
+                                  physics: const ClampingScrollPhysics(),
+                                  shrinkWrap: false,
+                                  separatorBuilder: (context, index) {
+                                    return const Divider(
+                                      color: AppColors.divider,
+                                      height: 0.5,
+                                    );
+                                  },
+                                  itemCount: viewModel.filteredCryptos.length,
+                                  itemBuilder: (context, index) {
+                                    final crypto =
+                                        viewModel.filteredCryptos[index];
+                                    return CryptoItemHome(
+                                      currencySymbol:
+                                          Currency.fromCode(
+                                            viewModel.currency,
+                                          )?.sifra ??
+                                          '?',
+                                      crypto: crypto,
+                                    );
+                                  },
+                                ),
                               ),
                     ),
                   ),

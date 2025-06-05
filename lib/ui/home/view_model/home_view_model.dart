@@ -106,4 +106,9 @@ class HomeViewModel extends BaseViewModel {
       setState(ViewState.error, 'Não foi possível buscar as Criptomoedas');
     }
   }
+
+  Future<void> refreshCryptoCurrencies(BuildContext context) async {
+    await fetchCryptoCurrencies(currency, context);
+    filterCryptosByFilter(HomeFilterCrypto.all);
+  }
 }
