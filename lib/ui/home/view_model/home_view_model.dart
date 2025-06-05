@@ -23,7 +23,13 @@ class HomeViewModel extends BaseViewModel {
     selectedFilter = label;
     switch (label) {
       case HomeFilterCrypto.all:
-        filteredCryptos = allCryptos;
+        filteredCryptos = [...allCryptos]..sort((crypto1, crypto2) {
+          final valorCrypto1 =
+              double.tryParse(crypto1.latestPrice.amount.amount) ?? 0.0;
+          final valorCrypto2 =
+              double.tryParse(crypto2.latestPrice.amount.amount) ?? 0.0;
+          return valorCrypto2.compareTo(valorCrypto1);
+        });
         break;
       case HomeFilterCrypto.high:
         filteredCryptos =
@@ -53,13 +59,17 @@ class HomeViewModel extends BaseViewModel {
 
   void filterCryptosByInputUser(String input) {
     final inputLowerCase = input.toLowerCase();
-    filteredCryptos =
-        allCryptos
-            .where(
-              (crypto) => crypto.name.toLowerCase().startsWith(inputLowerCase),
-            )
-            .toList();
-    notifyListeners();
+    if (inputLowerCase.isEmpty) {
+      filterCryptosByFilter(selectedFilter);
+    } else {
+      filteredCryptos =
+          allCryptos
+              .where(
+                (crypto) => crypto.name.toLowerCase().contains(inputLowerCase),
+              )
+              .toList();
+      notifyListeners();
+    }
   }
 
   Future<void> fetchCryptoCurrencies(
@@ -80,15 +90,16 @@ class HomeViewModel extends BaseViewModel {
           await precacheImage(image, context);
         }),
       );
-
       _allImagesPrecached = true;
 
-      filteredCryptos =
+      allCryptos =
           allCryptos.where((crypto) {
             final amount =
                 double.tryParse(crypto.latestPrice.amount.amount) ?? 0.0;
             return amount >= 0.01;
           }).toList();
+
+      filterCryptosByFilter(HomeFilterCrypto.all);
 
       setState(ViewState.success);
     } catch (error) {
