@@ -4,7 +4,7 @@ class CryptoModel {
   final String name;
   final String? color;
   final String imageUrl;
-  final String description;
+  String description;
   final String currency;
   final double percentChange;
   final LatestPrice latestPrice;

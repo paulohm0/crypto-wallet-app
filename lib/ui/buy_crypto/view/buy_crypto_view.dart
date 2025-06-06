@@ -17,7 +17,6 @@ class BuyCryptoView extends StatefulWidget {
 }
 
 class _BuyCryptoViewState extends State<BuyCryptoView> {
-  late BuyCryptoViewModel viewModel;
   late BuyCryptoArguments selectedCrypto;
 
   @override
@@ -25,13 +24,6 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
     super.didChangeDependencies();
     selectedCrypto =
         ModalRoute.of(context)!.settings.arguments as BuyCryptoArguments;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      viewModel = context.read<BuyCryptoViewModel>();
-      viewModel.fetchCryptoPricesToChart(
-        selectedCrypto.crypto.id,
-        selectedCrypto.crypto.currency,
-      );
-    });
   }
 
   @override

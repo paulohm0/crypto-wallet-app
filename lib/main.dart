@@ -1,4 +1,4 @@
-import 'package:crypto_wallet/core/dependency%20injection/setup_providers.dart';
+import 'package:crypto_wallet/core/dependency_injection/setup_providers.dart';
 import 'package:crypto_wallet/core/theme/app_theme.dart';
 import 'package:crypto_wallet/core/utils/keyboard_focus.dart';
 import 'package:crypto_wallet/ui/buy_crypto/view/buy_crypto_view.dart';
