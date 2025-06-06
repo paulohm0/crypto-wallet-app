@@ -1,105 +1,55 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/ui/buy_crypto/utils/filter_label_enum.dart';
 import 'package:flutter/material.dart';
 
-class FilterCryptoChart extends StatelessWidget {
+class FilterCryptoChart extends StatefulWidget {
   const FilterCryptoChart({super.key});
+
+  @override
+  State<FilterCryptoChart> createState() => _FilterCryptoChartState();
+}
+
+class _FilterCryptoChartState extends State<FilterCryptoChart> {
+  FilterChartLabelEnum selectedFilter = FilterChartLabelEnum.dia;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 50,
-          height: 40,
-          child: TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.white.withAlpha(10)),
-            ),
-            onPressed: () {},
-            child: Text(
-              '1h',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
+      children:
+          FilterChartLabelEnum.values.map((filter) {
+            final bool isSelected = filter == selectedFilter;
+
+            return SizedBox(
+              width: 46,
+              height: 40,
+              child: TextButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(
+                    isSelected
+                        ? Colors.white.withAlpha(25)
+                        : Colors.transparent,
+                  ),
+                  overlayColor: WidgetStateProperty.all(
+                    Colors.white.withAlpha(10),
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    selectedFilter = filter;
+                  });
+                },
+                child: Text(
+                  filter.label,
+                  style: TextStyle(
+                    color: isSelected ? Colors.amber : AppColors.white,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 40,
-          child: TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.white.withAlpha(10)),
-            ),
-            onPressed: () {},
-            child: Text(
-              '24h',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 40,
-          child: TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.white.withAlpha(10)),
-            ),
-            onPressed: () {},
-            child: Text(
-              '10',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 40,
-          child: TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.white.withAlpha(10)),
-            ),
-            onPressed: () {},
-            child: Text(
-              '1a',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 55,
-          height: 40,
-          child: TextButton(
-            style: ButtonStyle(
-              overlayColor: WidgetStateProperty.all(Colors.white.withAlpha(10)),
-            ),
-            onPressed: () {},
-            child: Text(
-              'Tudo',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-      ],
+            );
+          }).toList(),
     );
   }
 }
