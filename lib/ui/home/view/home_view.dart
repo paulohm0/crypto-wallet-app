@@ -112,7 +112,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                       Text(
-                        'Cotação / Última hora',
+                        'Cotação / Últimas 24 horas',
                         style: TextStyle(
                           color: AppColors.white,
                           fontSize: AppFontSizes.xx,

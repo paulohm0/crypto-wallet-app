@@ -6,8 +6,8 @@ import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/core/utils/translator_crypto_description.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
-import 'package:crypto_wallet/shared/widgets/percent_change_indicator.dart';
 import 'package:crypto_wallet/ui/buy_crypto/view_model/buy_crypto_view_model.dart';
+import 'package:crypto_wallet/ui/home/utils/percent_change_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -144,7 +144,7 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
                   ),
                   PercentChangeIndicator(
                     percentChangeLastHour:
-                        widget.crypto.latestPrice.percentChange.hour * 100,
+                        widget.crypto.latestPrice.percentChange.day,
                   ),
                 ],
               ),

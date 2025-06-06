@@ -3,7 +3,8 @@ import 'package:crypto_wallet/ui/buy_crypto/utils/filter_label_enum.dart';
 import 'package:flutter/material.dart';
 
 class FilterCryptoChart extends StatefulWidget {
-  const FilterCryptoChart({super.key});
+  final void Function(FilterChartLabelEnum)? onFilterChanged;
+  const FilterCryptoChart({super.key, this.onFilterChanged});
 
   @override
   State<FilterCryptoChart> createState() => _FilterCryptoChartState();
@@ -25,6 +26,11 @@ class _FilterCryptoChartState extends State<FilterCryptoChart> {
               height: 40,
               child: TextButton(
                 style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                   backgroundColor: WidgetStateProperty.all(
                     isSelected
                         ? Colors.white.withAlpha(25)
@@ -38,6 +44,7 @@ class _FilterCryptoChartState extends State<FilterCryptoChart> {
                   setState(() {
                     selectedFilter = filter;
                   });
+                  widget.onFilterChanged?.call(filter);
                 },
                 child: Text(
                   filter.label,

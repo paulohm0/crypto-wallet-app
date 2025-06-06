@@ -57,7 +57,7 @@ class PriceData {
 
   factory PriceData.fromJson(Map<String, dynamic> json) {
     return PriceData(
-      percentChange: json['percent_change'] ?? 0.0,
+      percentChange: (json['percent_change'] * 100) ?? 0.0,
       prices:
           (json['prices'] as List)
               .map((price) => PricePoint.fromList(price))

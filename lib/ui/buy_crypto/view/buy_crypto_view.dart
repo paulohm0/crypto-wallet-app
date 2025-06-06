@@ -43,7 +43,17 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                         child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: Image.network(selectedCrypto.crypto.imageUrl),
+                          child: Image.network(
+                            selectedCrypto.crypto.imageUrl,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/crypto_default_icon_image.jpg',
+                                width: 30,
+                                height: 30,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(width: 8.0),
@@ -74,10 +84,13 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                         ),
                       ),
                       Text(
-                        '${(viewModel.priceData!.percentChange * 100).toStringAsFixed(2)}%',
+                        '${viewModel.priceData!.percentChange.toStringAsFixed(2)}% (${viewModel.lastFilter.label})',
                         style: TextStyle(
-                          color: AppColors.grey,
-                          fontSize: 12,
+                          color:
+                              viewModel.priceData!.percentChange < 0
+                                  ? AppColors.red
+                                  : AppColors.green,
+                          fontSize: 10,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -85,7 +98,15 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                   ),
                   SizedBox(height: 8.0),
                   Divider(color: AppColors.divider, height: 1.0),
-                  FilterCryptoChart(),
+                  FilterCryptoChart(
+                    onFilterChanged: (filter) {
+                      viewModel.fetchCryptoPricesToChart(
+                        selectedCrypto.crypto.id,
+                        selectedCrypto.crypto.currency,
+                        filter: filter,
+                      );
+                    },
+                  ),
                   Divider(color: AppColors.divider, height: 1.0),
                   CryptoChart(spots: viewModel.spots.reversed.toList()),
                   Divider(color: AppColors.divider),
@@ -96,8 +117,23 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                       Column(
                         children: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.greyBackground,
+                              side: BorderSide(color: AppColors.primary),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                             onPressed: () {},
-                            child: Icon(Icons.download),
+                            child: Row(
+                              children: [
+                                Icon(Icons.download, color: AppColors.primary),
+                                Icon(
+                                  Icons.monetization_on,
+                                  color: AppColors.primary,
+                                ),
+                              ],
+                            ),
                           ),
                           Text(
                             'Comprar',
@@ -109,11 +145,27 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                           ),
                         ],
                       ),
+                      SizedBox(width: 16),
                       Column(
                         children: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.greyBackground,
+                              side: BorderSide(color: AppColors.primary),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                             onPressed: () {},
-                            child: Icon(Icons.upload),
+                            child: Row(
+                              children: [
+                                Icon(Icons.upload, color: AppColors.primary),
+                                Icon(
+                                  Icons.monetization_on,
+                                  color: AppColors.primary,
+                                ),
+                              ],
+                            ),
                           ),
                           Text(
                             'Vender',

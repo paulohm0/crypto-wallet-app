@@ -69,7 +69,7 @@ class LatestPrice {
       percentChange:
           json['percent_change'] == null
               ? PercentChange.empty()
-              : PercentChange.fromJson(json['percent_change']),
+              : PercentChange.fromJson((json['percent_change'])),
     );
   }
 
