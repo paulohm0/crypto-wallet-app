@@ -144,7 +144,7 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
                   ),
                   PercentChangeIndicator(
                     percentChangeLastHour:
-                        widget.crypto.latestPrice.percentChange.day,
+                        widget.crypto.latestPrice.percentChange.day * 100,
                   ),
                 ],
               ),

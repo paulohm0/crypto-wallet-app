@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/ui/buy_crypto/widgets/loading_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class CryptoChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (spots.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return const LoadingChart();
     }
 
     final minX = spots.first.x;
