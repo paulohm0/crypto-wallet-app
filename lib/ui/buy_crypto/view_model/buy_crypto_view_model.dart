@@ -6,7 +6,6 @@ import 'package:fl_chart/fl_chart.dart';
 
 class BuyCryptoViewModel extends BaseViewModel {
   final PricesChartDatasource datasource;
-
   BuyCryptoViewModel(this.datasource);
 
   List<FlSpot> spots = [];
@@ -26,18 +25,14 @@ class BuyCryptoViewModel extends BaseViewModel {
         spots.isNotEmpty) {
       return;
     }
-
     try {
       spots.clear();
       setState(ViewState.loading);
-
       final response = await datasource.getCryptoPriceToChart(
         idCrypto,
         currency,
       );
-
       List<PricePoint> pricePoints;
-
       switch (filter) {
         case FilterChartLabelEnum.hora:
           pricePoints = response.data.prices.hour.prices;

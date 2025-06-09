@@ -40,10 +40,6 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       viewModel = context.read<BuyCryptoViewModel>();
-      viewModel.fetchCryptoPricesToChart(
-        widget.crypto.id,
-        widget.crypto.currency,
-      );
     });
   }
 
@@ -64,6 +60,10 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
                   const Center(child: CircularProgressIndicator()),
                 ],
               ),
+        );
+        viewModel.fetchCryptoPricesToChart(
+          widget.crypto.id,
+          widget.crypto.currency,
         );
         widget.crypto.description =
             await widget.crypto.description.translateToPTBR();
