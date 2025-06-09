@@ -55,7 +55,7 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
                 children: [
                   BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                    child: Container(color: Colors.black.withAlpha(25)),
+                    child: Container(color: AppColors.black.withAlpha(25)),
                   ),
                   const Center(child: CircularProgressIndicator()),
                 ],

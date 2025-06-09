@@ -139,8 +139,8 @@ class _HomeViewState extends State<HomeView> {
                                   refreshController.refreshCompleted();
                                 },
                                 header: MaterialClassicHeader(
-                                  color: Colors.white,
-                                  backgroundColor: Colors.transparent,
+                                  color: AppColors.white,
+                                  backgroundColor: AppColors.transparent,
                                 ),
                                 child: ListView.separated(
                                   physics: const ClampingScrollPhysics(),

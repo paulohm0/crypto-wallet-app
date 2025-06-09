@@ -1,3 +1,4 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -7,10 +8,10 @@ class LoadingChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.transparent!,
-      highlightColor: Colors.grey[500]!,
+      baseColor: AppColors.transparent,
+      highlightColor: AppColors.grey,
       child: Container(
-        decoration: BoxDecoration(color: Colors.grey[500]),
+        decoration: BoxDecoration(color: AppColors.grey),
         width: 400,
         height: 200,
       ),

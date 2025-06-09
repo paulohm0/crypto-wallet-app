@@ -1,4 +1,6 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
+import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/ui/buy_crypto/utils/filter_label_enum.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +35,11 @@ class _FilterCryptoChartState extends State<FilterCryptoChart> {
                   ),
                   backgroundColor: WidgetStateProperty.all(
                     isSelected
-                        ? Colors.white.withAlpha(25)
-                        : Colors.transparent,
+                        ? AppColors.white.withAlpha(25)
+                        : AppColors.transparent,
                   ),
                   overlayColor: WidgetStateProperty.all(
-                    Colors.white.withAlpha(10),
+                    AppColors.white.withAlpha(10),
                   ),
                 ),
                 onPressed: () {
@@ -49,9 +51,9 @@ class _FilterCryptoChartState extends State<FilterCryptoChart> {
                 child: Text(
                   filter.label,
                   style: TextStyle(
-                    color: isSelected ? Colors.amber : AppColors.white,
-                    fontSize: 8,
-                    fontWeight: FontWeight.w700,
+                    color: isSelected ? AppColors.primary : AppColors.white,
+                    fontSize: AppFontSizes.xx,
+                    fontWeight: AppFontWeights.bold,
                   ),
                 ),
               ),

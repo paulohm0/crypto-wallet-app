@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
@@ -77,7 +78,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                               style: TextStyle(
                                 height: 1.0,
                                 color: AppColors.grey,
-                                fontSize: 8,
+                                fontSize: AppFontSizes.xx,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -86,7 +87,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                                   .toCurrency(selectedCrypto.currencySymbol),
                               style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 18,
+                                fontSize: AppFontSizes.lg,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -100,7 +101,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                               viewModel.priceData!.percentChange < 0
                                   ? AppColors.red
                                   : AppColors.green,
-                          fontSize: 10,
+                          fontSize: AppFontSizes.sss,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -149,7 +150,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                             'Comprar',
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 10,
+                              fontSize: AppFontSizes.sss,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -181,7 +182,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                             'Vender',
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 10,
+                              fontSize: AppFontSizes.sss,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

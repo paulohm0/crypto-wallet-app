@@ -1,3 +1,5 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:flutter/material.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
@@ -9,7 +11,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       centerTitle: true,
       title: Padding(
         padding: const EdgeInsets.only(top: 5.0),
@@ -19,16 +21,16 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
               TextSpan(
                 text: 'Crypto',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+                  color: AppColors.white,
+                  fontSize: AppFontSizes.xl,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               TextSpan(
                 text: 'Wallet',
                 style: TextStyle(
-                  color: Color(0xFFFEB83D),
-                  fontSize: 20,
+                  color: AppColors.primary,
+                  fontSize: AppFontSizes.xl,
                   fontWeight: FontWeight.w700,
                 ),
               ),

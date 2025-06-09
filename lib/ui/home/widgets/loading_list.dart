@@ -1,3 +1,4 @@
+import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -13,15 +14,15 @@ class LoadingList extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Shimmer.fromColors(
-            baseColor: Colors.grey[700]!,
-            highlightColor: Colors.grey[500]!,
+            baseColor: AppColors.grey2,
+            highlightColor: AppColors.grey,
             child: Row(
               children: [
                 Container(
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.grey[500],
+                    color: AppColors.grey,
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -30,7 +31,7 @@ class LoadingList extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[500],
+                      color: AppColors.grey,
                     ),
                     width: double.infinity,
                     height: 30,
