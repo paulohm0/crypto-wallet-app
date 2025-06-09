@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/ui/buy_crypto/view_model/buy_crypto_view_model.dart';
@@ -36,7 +37,16 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    selectedCrypto.crypto.name,
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: AppFontWeights.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
                   Row(
                     children: [
                       ClipOval(
