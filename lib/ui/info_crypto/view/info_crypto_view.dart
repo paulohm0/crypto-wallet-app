@@ -3,22 +3,22 @@ import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
-import 'package:crypto_wallet/ui/buy_crypto/view_model/buy_crypto_view_model.dart';
-import 'package:crypto_wallet/ui/buy_crypto/widgets/crypto_chart.dart';
-import 'package:crypto_wallet/ui/buy_crypto/widgets/crypto_info.dart';
-import 'package:crypto_wallet/ui/buy_crypto/widgets/filter_crypto_chart.dart';
 import 'package:crypto_wallet/ui/home/widgets/crypto_item_home.dart';
+import 'package:crypto_wallet/ui/info_crypto/view_model/info_crypto_view_model.dart';
+import 'package:crypto_wallet/ui/info_crypto/widgets/about_crypto.dart';
+import 'package:crypto_wallet/ui/info_crypto/widgets/crypto_chart.dart';
+import 'package:crypto_wallet/ui/info_crypto/widgets/filter_crypto_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BuyCryptoView extends StatefulWidget {
-  const BuyCryptoView({super.key});
+class InfoCryptoView extends StatefulWidget {
+  const InfoCryptoView({super.key});
 
   @override
-  State<BuyCryptoView> createState() => _BuyCryptoViewState();
+  State<InfoCryptoView> createState() => _InfoCryptoViewState();
 }
 
-class _BuyCryptoViewState extends State<BuyCryptoView> {
+class _InfoCryptoViewState extends State<InfoCryptoView> {
   late BuyCryptoArguments selectedCrypto;
 
   @override
@@ -32,7 +32,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCustom(),
-      body: Consumer<BuyCryptoViewModel>(
+      body: Consumer<InfoCryptoViewModel>(
         builder: (context, viewModel, _) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -188,7 +188,7 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                       ),
                     ],
                   ),
-                  CryptoInfo(selectedCrypto: selectedCrypto),
+                  AboutCrypto(selectedCrypto: selectedCrypto),
                 ],
               ),
             ),

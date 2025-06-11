@@ -4,9 +4,9 @@ import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/ui/home/widgets/crypto_item_home.dart';
 import 'package:flutter/material.dart';
 
-class CryptoInfo extends StatelessWidget {
+class AboutCrypto extends StatelessWidget {
   final BuyCryptoArguments selectedCrypto;
-  const CryptoInfo({super.key, required this.selectedCrypto});
+  const AboutCrypto({super.key, required this.selectedCrypto});
 
   @override
   Widget build(BuildContext context) {

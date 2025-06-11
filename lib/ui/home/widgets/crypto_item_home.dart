@@ -6,8 +6,8 @@ import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/core/utils/translator_crypto_description.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
-import 'package:crypto_wallet/ui/buy_crypto/view_model/buy_crypto_view_model.dart';
-import 'package:crypto_wallet/ui/home/utils/percent_change_indicator.dart';
+import 'package:crypto_wallet/ui/home/widgets/percent_change_indicator.dart';
+import 'package:crypto_wallet/ui/info_crypto/view_model/info_crypto_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,13 +33,13 @@ class CryptoItemHome extends StatefulWidget {
 }
 
 class _CryptoItemHomeState extends State<CryptoItemHome> {
-  late BuyCryptoViewModel viewModel;
+  late InfoCryptoViewModel viewModel;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      viewModel = context.read<BuyCryptoViewModel>();
+      viewModel = context.read<InfoCryptoViewModel>();
     });
   }
 
@@ -73,7 +73,7 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
         if (context.mounted) {
           Navigator.pushNamed(
             context,
-            '/buy',
+            '/infocripto',
             arguments: BuyCryptoArguments(
               crypto: widget.crypto,
               currencySymbol: widget.currencySymbol,

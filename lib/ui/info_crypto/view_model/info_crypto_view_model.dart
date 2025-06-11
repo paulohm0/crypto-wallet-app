@@ -1,12 +1,12 @@
 import 'package:crypto_wallet/data/datasource/prices_chart_datasource.dart';
 import 'package:crypto_wallet/data/models/prices_chart_model.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
-import 'package:crypto_wallet/ui/buy_crypto/utils/filter_label_enum.dart';
+import 'package:crypto_wallet/ui/info_crypto/utils/filter_label_enum.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class BuyCryptoViewModel extends BaseViewModel {
+class InfoCryptoViewModel extends BaseViewModel {
   final PricesChartDatasource datasource;
-  BuyCryptoViewModel(this.datasource);
+  InfoCryptoViewModel(this.datasource);
 
   List<FlSpot> spots = [];
   FilterChartLabelEnum lastFilter = FilterChartLabelEnum.dia;
