@@ -34,22 +34,22 @@ class HomeViewModel extends BaseViewModel {
       case HomeFilterCrypto.high:
         filteredCryptos =
             allCryptos
-                .where((crypto) => crypto.latestPrice.percentChange.hour > 0)
+                .where((crypto) => crypto.latestPrice.percentChange.day > 0)
                 .toList()
               ..sort(
-                (a, b) => b.latestPrice.percentChange.hour.compareTo(
-                  a.latestPrice.percentChange.hour,
+                (a, b) => b.latestPrice.percentChange.day.compareTo(
+                  a.latestPrice.percentChange.day,
                 ),
               );
         break;
       case HomeFilterCrypto.low:
         filteredCryptos =
             allCryptos
-                .where((crypto) => crypto.latestPrice.percentChange.hour < 0)
+                .where((crypto) => crypto.latestPrice.percentChange.day < 0)
                 .toList()
               ..sort(
-                (a, b) => b.latestPrice.percentChange.hour.compareTo(
-                  a.latestPrice.percentChange.hour,
+                (a, b) => b.latestPrice.percentChange.day.compareTo(
+                  a.latestPrice.percentChange.day,
                 ),
               );
         break;
