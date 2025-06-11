@@ -1,7 +1,7 @@
 enum FilterChartLabelEnum {
-  hora('1h'),
-  dia('24h'),
-  semana('1s'),
+  hora('1hr'),
+  dia('24hr'),
+  semana('7d'),
   mes('1m'),
   ano('1a'),
   tudo('Tudo');

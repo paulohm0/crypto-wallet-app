@@ -17,7 +17,7 @@ class CryptoInfo extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Text(
-              'Sobre o projeto',
+              'Sobre o ${selectedCrypto.crypto.name}',
               style: TextStyle(
                 color: AppColors.white,
                 fontWeight: AppFontWeights.semiBold,

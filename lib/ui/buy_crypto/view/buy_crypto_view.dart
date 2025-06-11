@@ -95,10 +95,10 @@ class _BuyCryptoViewState extends State<BuyCryptoView> {
                         ),
                       ),
                       Text(
-                        '${viewModel.priceData!.percentChange.toStringAsFixed(2)}% (${viewModel.lastFilter.label})',
+                        '${viewModel.priceData?.toStringAsFixed(2)}% (${viewModel.lastFilter.label})',
                         style: TextStyle(
                           color:
-                              viewModel.priceData!.percentChange < 0
+                              viewModel.priceData! < 0
                                   ? AppColors.red
                                   : AppColors.green,
                           fontSize: AppFontSizes.sss,

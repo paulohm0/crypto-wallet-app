@@ -10,7 +10,7 @@ class BuyCryptoViewModel extends BaseViewModel {
 
   List<FlSpot> spots = [];
   FilterChartLabelEnum lastFilter = FilterChartLabelEnum.dia;
-  PriceData? priceData;
+  double? priceData;
   String? _lastCryptoId;
   String? _lastCurrency;
 
@@ -36,27 +36,27 @@ class BuyCryptoViewModel extends BaseViewModel {
       switch (filter) {
         case FilterChartLabelEnum.hora:
           pricePoints = response.data.prices.hour.prices;
-          priceData = response.data.prices.hour;
+          priceData = response.data.prices.latePrice.percentChange.hour;
           break;
         case FilterChartLabelEnum.dia:
           pricePoints = response.data.prices.day.prices;
-          priceData = response.data.prices.day;
+          priceData = response.data.prices.latePrice.percentChange.day;
           break;
         case FilterChartLabelEnum.semana:
           pricePoints = response.data.prices.week.prices;
-          priceData = response.data.prices.week;
+          priceData = response.data.prices.latePrice.percentChange.week;
           break;
         case FilterChartLabelEnum.mes:
           pricePoints = response.data.prices.month.prices;
-          priceData = response.data.prices.month;
+          priceData = response.data.prices.latePrice.percentChange.month;
           break;
         case FilterChartLabelEnum.ano:
           pricePoints = response.data.prices.year.prices;
-          priceData = response.data.prices.year;
+          priceData = response.data.prices.latePrice.percentChange.year;
           break;
         case FilterChartLabelEnum.tudo:
           pricePoints = response.data.prices.all.prices;
-          priceData = response.data.prices.all;
+          priceData = response.data.prices.latePrice.percentChange.all;
           break;
       }
       final firstTimestamp = pricePoints.first.timestamp;

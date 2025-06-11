@@ -21,6 +21,7 @@ class DataPrices {
 }
 
 class Prices {
+  final LatePrice latePrice;
   final PriceData hour;
   final PriceData day;
   final PriceData week;
@@ -35,6 +36,7 @@ class Prices {
     required this.month,
     required this.year,
     required this.all,
+    required this.latePrice,
   });
 
   factory Prices.fromJson(Map<String, dynamic> json) {
@@ -45,19 +47,29 @@ class Prices {
       month: PriceData.fromJson(json['month']),
       year: PriceData.fromJson(json['year']),
       all: PriceData.fromJson(json['all']),
+      latePrice: LatePrice.fromJson(json['latest_price']),
+    );
+  }
+}
+
+class LatePrice {
+  final PercentChange percentChange;
+  LatePrice({required this.percentChange});
+
+  factory LatePrice.fromJson(Map<String, dynamic> json) {
+    return LatePrice(
+      percentChange: PercentChange.fromJson(json['percent_change']),
     );
   }
 }
 
 class PriceData {
-  final double percentChange;
   final List<PricePoint> prices;
 
-  PriceData({required this.prices, required this.percentChange});
+  PriceData({required this.prices});
 
   factory PriceData.fromJson(Map<String, dynamic> json) {
     return PriceData(
-      percentChange: (json['percent_change'] * 100) ?? 0.0,
       prices:
           (json['prices'] as List)
               .map((price) => PricePoint.fromList(price))
@@ -76,6 +88,45 @@ class PricePoint {
     return PricePoint(
       price: double.tryParse(list[0].toString()) ?? 0.0,
       timestamp: list[1],
+    );
+  }
+}
+
+class PercentChange {
+  final double hour;
+  final double day;
+  final double week;
+  final double month;
+  final double year;
+  final double all;
+
+  PercentChange({
+    required this.hour,
+    required this.day,
+    required this.week,
+    required this.month,
+    required this.year,
+    required this.all,
+  });
+
+  factory PercentChange.fromJson(Map<String, dynamic> json) {
+    return PercentChange(
+      hour: ((json['hour'] * 100) as num?)?.toDouble() ?? 0.0,
+      day: ((json['day'] * 100) as num?)?.toDouble() ?? 0.0,
+      week: ((json['week'] * 100) as num?)?.toDouble() ?? 0.0,
+      month: ((json['month'] * 100) as num?)?.toDouble() ?? 0.0,
+      year: ((json['year'] * 100) as num?)?.toDouble() ?? 0.0,
+      all: ((json['all'] * 100) as num?)?.toDouble() ?? 0.0,
+    );
+  }
+  factory PercentChange.empty() {
+    return PercentChange(
+      hour: 0.0,
+      day: 0.0,
+      week: 0.0,
+      month: 0.0,
+      year: 0.0,
+      all: 0.0,
     );
   }
 }
