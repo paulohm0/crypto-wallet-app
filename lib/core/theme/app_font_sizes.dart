@@ -7,6 +7,7 @@ class AppFontSizes {
   static const double md = 16.0;
   static const double lg = 18.0; // used
   static const double xl = 20.0; // used
+  static const double ll = 24.0; // used
   static const double xxl = 32.0;
   static const double xll = 38.0; // used
 }
