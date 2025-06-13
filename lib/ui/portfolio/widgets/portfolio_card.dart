@@ -70,8 +70,8 @@ class PortfolioCard extends StatelessWidget {
                       'R\$ 1.618,75',
                       style: TextStyle(
                         color: AppColors.white,
-                        fontSize: AppFontSizes.sm,
-                        fontWeight: AppFontWeights.bold,
+                        fontSize: AppFontSizes.lg,
+                        fontWeight: AppFontWeights.medium,
                       ),
                     ),
                   ],
@@ -98,8 +98,8 @@ class PortfolioCard extends StatelessWidget {
                       'R\$ 504,50',
                       style: TextStyle(
                         color: AppColors.white,
-                        fontSize: AppFontSizes.sm,
-                        fontWeight: AppFontWeights.bold,
+                        fontSize: AppFontSizes.lg,
+                        fontWeight: AppFontWeights.medium,
                       ),
                     ),
                   ],
