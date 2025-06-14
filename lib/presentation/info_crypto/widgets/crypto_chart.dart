@@ -1,7 +1,8 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
-import 'package:crypto_wallet/ui/info_crypto/widgets/loading_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
+import 'loading_chart.dart';
 
 class CryptoChart extends StatelessWidget {
   final List<FlSpot> spots;

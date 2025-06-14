@@ -1,12 +1,12 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/data/currency.dart';
+import 'package:crypto_wallet/presentation/home/view_model/home_view_model.dart';
+import 'package:crypto_wallet/presentation/home/widgets/crypto_item_home.dart';
+import 'package:crypto_wallet/presentation/home/widgets/loading_list.dart';
+import 'package:crypto_wallet/presentation/home/widgets/popup_menu_filter_crypto.dart';
+import 'package:crypto_wallet/presentation/home/widgets/popup_menu_filter_currency.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
-import 'package:crypto_wallet/ui/home/view_model/home_view_model.dart';
-import 'package:crypto_wallet/ui/home/widgets/crypto_item_home.dart';
-import 'package:crypto_wallet/ui/home/widgets/loading_list.dart';
-import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_crypto.dart';
-import 'package:crypto_wallet/ui/home/widgets/popup_menu_filter_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

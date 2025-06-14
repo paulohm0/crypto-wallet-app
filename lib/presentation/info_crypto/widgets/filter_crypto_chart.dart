@@ -1,7 +1,7 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
-import 'package:crypto_wallet/ui/info_crypto/utils/filter_label_enum.dart';
+import 'package:crypto_wallet/presentation/info_crypto/utils/filter_label_enum.dart';
 import 'package:flutter/material.dart';
 
 class FilterCryptoChart extends StatefulWidget {

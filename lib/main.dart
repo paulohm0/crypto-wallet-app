@@ -1,13 +1,14 @@
-import 'package:crypto_wallet/core/dependency_injection/setup_providers.dart';
 import 'package:crypto_wallet/core/theme/app_theme.dart';
 import 'package:crypto_wallet/core/utils/keyboard_focus.dart';
+import 'package:crypto_wallet/presentation/home/view/home_view.dart';
+import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
+import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
+import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
+import 'package:crypto_wallet/presentation/welcome/view/welcome_view.dart';
 import 'package:crypto_wallet/shared/navigation/main_nav_view.dart';
-import 'package:crypto_wallet/ui/home/view/home_view.dart';
-import 'package:crypto_wallet/ui/info_crypto/view/info_crypto_view.dart';
-import 'package:crypto_wallet/ui/portfolio/view/portfolio_view.dart';
-import 'package:crypto_wallet/ui/profile/view/profile_view.dart';
-import 'package:crypto_wallet/ui/welcome/view/welcome_view.dart';
 import 'package:flutter/material.dart';
+
+import 'core/di/setup_providers.dart';
 
 void main() {
   runApp(setupProviders(child: const CryptoWalletApp()));

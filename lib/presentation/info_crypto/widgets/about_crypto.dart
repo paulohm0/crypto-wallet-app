@@ -1,7 +1,7 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
-import 'package:crypto_wallet/ui/home/widgets/crypto_item_home.dart';
+import 'package:crypto_wallet/presentation/home/widgets/crypto_item_home.dart';
 import 'package:flutter/material.dart';
 
 class AboutCrypto extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
+import 'package:crypto_wallet/presentation/home/view/home_view.dart';
+import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
+import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
-import 'package:crypto_wallet/ui/home/view/home_view.dart';
-import 'package:crypto_wallet/ui/portfolio/view/portfolio_view.dart';
-import 'package:crypto_wallet/ui/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class MainNavView extends StatefulWidget {
