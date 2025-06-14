@@ -1,4 +1,5 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/shared/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/ui/home/view/home_view.dart';
 import 'package:crypto_wallet/ui/portfolio/view/portfolio_view.dart';
@@ -37,23 +38,31 @@ class _MainNavViewState extends State<MainNavView> {
           splashColor: AppColors.grey2.withAlpha(75),
           highlightColor: Colors.transparent,
         ),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.wallet),
-              label: 'Portfólio',
-            ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.black,
-          unselectedItemColor: Colors.white,
-          selectedItemColor: AppColors.primary,
-          showUnselectedLabels: false,
-          showSelectedLabels: true,
+        child: SizedBox(
+          height: 70,
+          child: BottomNavigationBar(
+            iconSize: 20,
+            selectedFontSize: AppFontSizes.sss,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.wallet),
+                label: 'Portfólio',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Perfil',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: AppColors.black,
+            unselectedItemColor: Colors.white,
+            selectedItemColor: AppColors.primary,
+            showUnselectedLabels: false,
+            showSelectedLabels: true,
+          ),
         ),
       ),
     );
