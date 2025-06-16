@@ -6,11 +6,14 @@ import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
 import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
 import 'package:crypto_wallet/presentation/welcome/view/welcome_view.dart';
 import 'package:crypto_wallet/shared/navigation/main_nav_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'core/di/setup_providers.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(setupProviders(child: const CryptoWalletApp()));
 }
 
