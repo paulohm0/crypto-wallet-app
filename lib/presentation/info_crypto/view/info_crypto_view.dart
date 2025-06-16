@@ -126,70 +126,57 @@ class _InfoCryptoViewState extends State<InfoCryptoView> {
                   Divider(color: AppColors.divider, height: 1.0),
                   CryptoChart(spots: viewModel.spots.reversed.toList()),
                   Divider(color: AppColors.divider),
-                  SizedBox(height: 8.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Column(
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.greyBackground,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.greyBackground,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            onPressed: () {},
-                            child: Row(
-                              children: [
-                                Icon(Icons.download, color: AppColors.primary),
-                                Icon(
-                                  Icons.monetization_on,
+                          ),
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.upload, color: AppColors.primary),
+                              Text(
+                                'Vender',
+                                style: TextStyle(
                                   color: AppColors.primary,
+                                  fontWeight: AppFontWeights.bold,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Comprar',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: AppFontSizes.sss,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      SizedBox(width: 16),
-                      Column(
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.greyBackground,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                      SizedBox(width: 8.0),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.greyBackground,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            onPressed: () {},
-                            child: Row(
-                              children: [
-                                Icon(Icons.upload, color: AppColors.primary),
-                                Icon(
-                                  Icons.monetization_on,
+                          ),
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.download, color: AppColors.primary),
+                              Text(
+                                'Comprar',
+                                style: TextStyle(
                                   color: AppColors.primary,
+                                  fontWeight: AppFontWeights.bold,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Vender',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: AppFontSizes.sss,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
