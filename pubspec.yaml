@@ -34,6 +34,7 @@ flutter:
     - assets/images/crypto_wallet_icon_splash.png
     - assets/images/crypto_default_icon_image.jpg
     - assets/images/crypto_wallet_icon_welcome.png
+    - assets/images/google_icon.png
 
   fonts:
     - family: Montserrat

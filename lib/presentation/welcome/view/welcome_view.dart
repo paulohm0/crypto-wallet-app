@@ -80,7 +80,7 @@ class WelcomeView extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/main');
+                        Navigator.pushNamed(context, '/login');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
@@ -91,13 +91,28 @@ class WelcomeView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Text(
-                          'Começar',
+                          'Login',
                           style: TextStyle(
                             color: AppColors.black,
                             fontSize: AppFontSizes.sm,
                             fontWeight: AppFontWeights.bold,
                           ),
                         ),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/main');
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                    ),
+                    child: Text(
+                      'Continuar como visitante',
+                      style: TextStyle(
+                        fontSize: AppFontSizes.sss,
+                        decorationColor: AppColors.primary,
                       ),
                     ),
                   ),
