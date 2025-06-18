@@ -1,6 +1,6 @@
+import 'package:crypto_wallet/core/domain/entities/currency.dart';
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
-import 'package:crypto_wallet/data/currency.dart';
 import 'package:flutter/material.dart';
 
 class PopupMenuFilterCurrency extends StatefulWidget {

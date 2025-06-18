@@ -127,11 +127,14 @@ class _EmailPasswordInputState extends State<EmailPasswordInput> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              'Esqueceu sua senha ?',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontSize: AppFontSizes.sss,
+            GestureDetector(
+              onTap: () {},
+              child: Text(
+                'Esqueceu sua senha ?',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: AppFontSizes.sss,
+                ),
               ),
             ),
           ],

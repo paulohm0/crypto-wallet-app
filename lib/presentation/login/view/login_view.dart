@@ -1,6 +1,7 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
+import 'package:crypto_wallet/data/datasource/auth/login_with_gmail.dart';
 import 'package:crypto_wallet/presentation/login/widgets/email_password_input.dart';
 import 'package:crypto_wallet/presentation/login/widgets/login_header.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _auth = GoogleAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,23 @@ class _LoginViewState extends State<LoginView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final user = await _auth.signInWithGoogle();
+                            if (user != null) {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                '/main',
+                              ); // ou qualquer rota
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Falha ao fazer login com o Google',
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                           style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),

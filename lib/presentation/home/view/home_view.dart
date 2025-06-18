@@ -1,6 +1,6 @@
+import 'package:crypto_wallet/core/domain/entities/currency.dart';
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
-import 'package:crypto_wallet/data/currency.dart';
 import 'package:crypto_wallet/presentation/home/view_model/home_view_model.dart';
 import 'package:crypto_wallet/presentation/home/widgets/crypto_item_home.dart';
 import 'package:crypto_wallet/presentation/home/widgets/loading_list.dart';

@@ -1,4 +1,4 @@
-import 'package:crypto_wallet/data/datasource/crypto_datasource.dart';
+import 'package:crypto_wallet/data/datasource/api/crypto_datasource.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/presentation/home/widgets/popup_menu_filter_crypto.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';

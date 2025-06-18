@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "684815924899",
+    "project_id": "flutter-projects-paulohm0",
+    "storage_bucket": "flutter-projects-paulohm0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684815924899:android:b647df68fc6f65513ec916",
+        "android_client_info": {
+          "package_name": "com.paulodev.crypto_wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684815924899-54p63bd5v8gu5usg5smi8mlih3a8gvad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paulodev.crypto_wallet",
+            "certificate_hash": "7f26354c7949bb2a0a60dca79d587b505101e118"
+          }
+        },
+        {
+          "client_id": "684815924899-vibaqos37gb97g0crugfu9u1rls387gv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBe4GBMvqvMtVimeLlYjQh5VcGccF4Ghc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684815924899-vibaqos37gb97g0crugfu9u1rls387gv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
