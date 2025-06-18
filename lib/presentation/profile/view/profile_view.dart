@@ -1,6 +1,8 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -31,10 +33,23 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               user.displayName ?? 'Sem nome',
-              style: const TextStyle(fontSize: 20,color: AppColors.white),
+              style: const TextStyle(fontSize: 20, color: AppColors.white),
             ),
             const SizedBox(height: 8),
-            Text(user.email ?? 'Sem e-mail',style: TextStyle(color: AppColors.white),),
+            Text(
+              user.email ?? 'Sem e-mail',
+              style: TextStyle(color: AppColors.white),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                await GoogleSignIn().signOut();
+                if (context.mounted) {
+                  Navigator.pushReplacementNamed(context, AppRoutes.login);
+                }
+              },
+              child: const Text('Sair'),
+            ),
           ],
         ),
       ),

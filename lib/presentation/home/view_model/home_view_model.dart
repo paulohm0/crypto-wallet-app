@@ -1,3 +1,4 @@
+import 'package:crypto_wallet/core/services/firebase/firebase_client.dart';
 import 'package:crypto_wallet/data/datasource/api/crypto_datasource.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/presentation/home/widgets/popup_menu_filter_crypto.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/widgets.dart';
 
 class HomeViewModel extends BaseViewModel {
   final CryptoDatasource cryptoDatasource;
-  HomeViewModel(this.cryptoDatasource);
+  final FirebaseClient firebaseClient;
+  HomeViewModel(this.cryptoDatasource, this.firebaseClient);
 
   List<CryptoModel> allCryptos = [];
   List<CryptoModel> filteredCryptos = [];

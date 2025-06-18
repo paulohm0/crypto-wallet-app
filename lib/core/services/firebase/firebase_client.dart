@@ -1,9 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseClient {
-  final FirebaseAuth firebaseAuth;
-
-  // útil para testes com mocks !
-  FirebaseClient({FirebaseAuth? authInstance})
-    : firebaseAuth = authInstance ?? FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore dbFirestore = FirebaseFirestore.instance;
 }
