@@ -7,9 +7,13 @@ class LoadingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final itemHeight = 46.0;
+    final itemCount = (screenHeight / itemHeight).ceil();
+
     return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 10,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: itemCount,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -21,7 +25,7 @@ class LoadingList extends StatelessWidget {
                 Container(
                   width: 30,
                   height: 30,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.grey,
                     shape: BoxShape.circle,
                   ),
@@ -29,12 +33,11 @@ class LoadingList extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Container(
+                    height: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: AppColors.grey,
                     ),
-                    width: double.infinity,
-                    height: 30,
                   ),
                 ),
               ],

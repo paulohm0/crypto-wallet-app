@@ -81,7 +81,7 @@ class WelcomeView extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.main);
+                        Navigator.pushNamed(context, AppRoutes.login);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
