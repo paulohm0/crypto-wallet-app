@@ -6,6 +6,7 @@ import 'package:crypto_wallet/presentation/login/view/login_view.dart';
 import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
 import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
 import 'package:crypto_wallet/presentation/welcome/view/welcome_view.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:crypto_wallet/shared/navigation/main_nav_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,15 +29,15 @@ class CryptoWalletApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorObservers: [KeyboardDismissObserver()],
       theme: AppTheme.theme,
-      initialRoute: '/welcome',
+      initialRoute: AppRoutes.welcome,
       routes: {
-        '/welcome': (context) => WelcomeView(),
-        '/login': (context) => LoginView(),
-        '/main': (context) => const MainNavView(),
-        '/profile': (context) => ProfileView(),
-        '/home': (context) => HomeView(),
-        '/infocripto': (context) => InfoCryptoView(),
-        '/portfolio': (context) => PortfolioView(),
+        AppRoutes.welcome: (context) => WelcomeView(),
+        AppRoutes.login: (context) => LoginView(),
+        AppRoutes.main: (context) => const MainNavView(),
+        AppRoutes.profile: (context) => ProfileView(),
+        AppRoutes.home: (context) => HomeView(),
+        AppRoutes.infoCrypto: (context) => InfoCryptoView(),
+        AppRoutes.portfolio: (context) => PortfolioView(),
       },
     );
   }

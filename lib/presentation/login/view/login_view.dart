@@ -4,6 +4,7 @@ import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/data/datasource/auth/login_with_gmail.dart';
 import 'package:crypto_wallet/presentation/login/widgets/email_password_input.dart';
 import 'package:crypto_wallet/presentation/login/widgets/login_header.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -46,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/login');
+                            Navigator.pushNamed(context, AppRoutes.login);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
@@ -100,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                             if (user != null) {
                               Navigator.pushReplacementNamed(
                                 context,
-                                '/main',
+                                AppRoutes.main,
                               ); // ou qualquer rota
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -129,7 +130,10 @@ class _LoginViewState extends State<LoginView> {
                         SizedBox(width: 8.0),
                         OutlinedButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/main');
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutes.main,
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(

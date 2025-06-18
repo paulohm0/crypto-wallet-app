@@ -8,6 +8,7 @@ import 'package:crypto_wallet/core/utils/translator_crypto_description.dart';
 import 'package:crypto_wallet/data/models/crypto_model.dart';
 import 'package:crypto_wallet/presentation/home/widgets/percent_change_indicator.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view_model/info_crypto_view_model.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +74,7 @@ class _CryptoItemHomeState extends State<CryptoItemHome> {
         if (context.mounted) {
           Navigator.pushNamed(
             context,
-            '/infocripto',
+            AppRoutes.infoCrypto,
             arguments: BuyCryptoArguments(
               crypto: widget.crypto,
               currencySymbol: widget.currencySymbol,

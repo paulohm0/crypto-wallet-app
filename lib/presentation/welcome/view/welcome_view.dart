@@ -1,6 +1,7 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -80,7 +81,7 @@ class WelcomeView extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        Navigator.pushNamed(context, AppRoutes.main);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
@@ -103,7 +104,7 @@ class WelcomeView extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/main');
+                      Navigator.pushReplacementNamed(context, AppRoutes.main);
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: AppColors.primary,
