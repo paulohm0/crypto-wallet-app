@@ -1,6 +1,6 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
-import 'package:crypto_wallet/presentation/_common/app_bar_custom.dart';
+import 'package:crypto_wallet/presentation/_common/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/presentation/home/view/home_view.dart';
 import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
 import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';

@@ -5,6 +5,7 @@ import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dar
 import 'package:crypto_wallet/presentation/login/view/login_view.dart';
 import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
 import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
+import 'package:crypto_wallet/presentation/trade/view/trade_view.dart';
 import 'package:crypto_wallet/presentation/welcome/view/welcome_view.dart';
 import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:crypto_wallet/shared/navigation/main_nav_view.dart';
@@ -39,6 +40,7 @@ class CryptoWalletApp extends StatelessWidget {
         AppRoutes.home: (context) => HomeView(),
         AppRoutes.infoCrypto: (context) => InfoCryptoView(),
         AppRoutes.portfolio: (context) => PortfolioView(),
+        AppRoutes.trade: (context) => TradeView(),
       },
     );
   }
