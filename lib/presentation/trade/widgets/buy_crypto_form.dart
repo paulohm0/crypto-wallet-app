@@ -13,7 +13,7 @@ class BuyCryptoForm extends StatefulWidget {
 class _BuyCryptoFormState extends State<BuyCryptoForm> {
   late final CurrencyTextFieldController _controller;
   double _brlValue = 0.0;
-  double btcPrice = 58947.22; // exemplo: valor 1 BTC em BRL
+  double btcPrice = 58947.22;
   String? _error;
 
   @override
@@ -25,7 +25,6 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
       thousandSymbol: '.',
       initDoubleValue: 0.00,
     );
-
     _controller.addListener(_updateValue);
   }
 
@@ -51,6 +50,7 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
       children: [
         TextField(
           controller: _controller,
+          showCursor: false,
           keyboardType: TextInputType.number,
           style: const TextStyle(
             fontSize: 16,
@@ -59,7 +59,16 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
           ),
           decoration: InputDecoration(
             labelText: 'Qual valor deseja investir?',
+            labelStyle: TextStyle(color: AppColors.grey),
             prefixText: 'BRL',
+            hintText: ' 0,00',
+            hintStyle: TextStyle(color: AppColors.white),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.grey),
+            ),
             prefixStyle: TextStyle(
               color: AppColors.white,
               fontWeight: AppFontWeights.medium,
@@ -70,14 +79,16 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
         const SizedBox(height: 8.0),
         Row(
           children: [
-            Text(
-              'BTC  ${btcAmount.toStringAsFixed(8)}',
-              style: const TextStyle(
-                fontSize: 16,
-                color: AppColors.white,
-                fontWeight: AppFontWeights.medium,
-              ),
-            ),
+            _brlValue > 0.0
+                ? Text(
+                  'BTC  ${btcAmount.toStringAsFixed(8)}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.white,
+                    fontWeight: AppFontWeights.medium,
+                  ),
+                )
+                : SizedBox(),
           ],
         ),
       ],
