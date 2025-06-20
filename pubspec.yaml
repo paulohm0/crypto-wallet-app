@@ -56,6 +56,9 @@ flutter:
         - asset: assets/fonts/Montserrat-BoldItalic.ttf
           weight: 700
           style: italic
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+          style: normal
 
 flutter_native_splash:
   color: "#000000"
