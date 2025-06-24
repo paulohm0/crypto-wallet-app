@@ -4,6 +4,7 @@ import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/presentation/_common/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
 import 'package:crypto_wallet/presentation/trade/widgets/buy_crypto_form.dart';
+import 'package:crypto_wallet/presentation/trade/widgets/show_purchase_confirmation.dart';
 import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -15,25 +16,9 @@ class TradeView extends StatefulWidget {
 }
 
 class _TradeViewState extends State<TradeView> {
+  late CurrencyTextFieldController controller;
   late TradeArguments tradeInformation;
-  late final CurrencyTextFieldController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = CurrencyTextFieldController(
-      currencySymbol: '',
-      decimalSymbol: ',',
-      thousandSymbol: '.',
-      initDoubleValue: 0.00,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
+  String? errorFieldValue;
 
   @override
   void didChangeDependencies() {
@@ -43,7 +28,37 @@ class _TradeViewState extends State<TradeView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    controller = CurrencyTextFieldController(
+      currencySymbol: '',
+      decimalSymbol: ',',
+      thousandSymbol: '.',
+      initDoubleValue: 0.00,
+    );
+    controller.addListener(_updateValue);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _updateValue() {
+    setState(() {
+      errorFieldValue =
+          controller.doubleValue < 10.0 ? 'Valor mínimo é R\$ 10,00' : null;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final cryptoAmount =
+        controller.doubleValue /
+        double.parse(
+          tradeInformation.cryptoArgs.crypto.latestPrice.amount.amount,
+        );
     return Scaffold(
       appBar: AppBarCustom(),
       body: SafeArea(
@@ -126,7 +141,12 @@ class _TradeViewState extends State<TradeView> {
                       ),
                     ),
                     const SizedBox(height: 24.0),
-                    BuyCryptoForm(),
+                    BuyCryptoForm(
+                      tradeInformation: tradeInformation,
+                      controller: controller,
+                      cryptoAmount: cryptoAmount,
+                      errorFieldValue: errorFieldValue,
+                    ),
                   ],
                 ),
               ),
@@ -136,7 +156,15 @@ class _TradeViewState extends State<TradeView> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showPurchaseConfirmationModal(
+                      context: context,
+                      tradeInformation: tradeInformation,
+                      quantity: controller.doubleValue,
+                      value: cryptoAmount,
+                      onConfirm: () {},
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(

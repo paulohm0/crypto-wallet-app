@@ -1,55 +1,34 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
+import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
 import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 
 class BuyCryptoForm extends StatefulWidget {
-  const BuyCryptoForm({super.key});
+  final TradeArguments tradeInformation;
+  final CurrencyTextFieldController controller;
+  final double cryptoAmount;
+  final String? errorFieldValue;
+  const BuyCryptoForm({
+    super.key,
+    required this.tradeInformation,
+    required this.controller,
+    required this.cryptoAmount,
+    required this.errorFieldValue,
+  });
 
   @override
   State<BuyCryptoForm> createState() => _BuyCryptoFormState();
 }
 
 class _BuyCryptoFormState extends State<BuyCryptoForm> {
-  late final CurrencyTextFieldController _controller;
-  double _brlValue = 0.0;
-  double btcPrice = 58947.22;
-  String? _error;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = CurrencyTextFieldController(
-      currencySymbol: '',
-      decimalSymbol: ',',
-      thousandSymbol: '.',
-      initDoubleValue: 0.00,
-    );
-    _controller.addListener(_updateValue);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _updateValue() {
-    setState(() {
-      _brlValue = _controller.doubleValue;
-      _error = _brlValue < 10.0 ? 'Valor mínimo é R\$ 10,00' : null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final btcAmount = _brlValue / btcPrice;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
-          controller: _controller,
+          controller: widget.controller,
           showCursor: false,
           keyboardType: TextInputType.number,
           style: const TextStyle(
@@ -73,22 +52,22 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
               color: AppColors.white,
               fontWeight: AppFontWeights.medium,
             ),
-            errorText: _error,
+            errorText: widget.errorFieldValue,
           ),
         ),
         const SizedBox(height: 8.0),
         Row(
           children: [
-            _brlValue > 0.0
+            widget.controller.doubleValue > 0.0
                 ? Text(
-                  'BTC  ${btcAmount.toStringAsFixed(8)}',
+                  '${widget.tradeInformation.cryptoArgs.crypto.symbol} ${widget.cryptoAmount.toStringAsFixed(6)}',
                   style: const TextStyle(
                     fontSize: 16,
                     color: AppColors.white,
                     fontWeight: AppFontWeights.medium,
                   ),
                 )
-                : SizedBox(),
+                : const SizedBox.shrink(),
           ],
         ),
       ],
