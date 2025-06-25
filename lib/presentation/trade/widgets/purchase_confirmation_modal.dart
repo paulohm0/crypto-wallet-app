@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
@@ -19,8 +21,14 @@ class PurchaseConfirmationModal extends StatelessWidget {
     required this.onConfirm,
   });
 
+  double generateFee() {
+    final random = Random();
+    return 1 + random.nextDouble() * 2;
+  }
+
   @override
   Widget build(BuildContext context) {
+    double fee = generateFee();
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -52,13 +60,45 @@ class PurchaseConfirmationModal extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          'Você vai pagar R\$ ${quantity.toStringAsFixed(2)}',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Você vai pagar',
+                              style: TextStyle(
+                                fontWeight: AppFontWeights.bold,
+                                fontSize: AppFontSizes.xs,
+                              ),
+                            ),
+                            Text(
+                              'R\$ ${(quantity + fee).toStringAsFixed(2).toCurrency(tradeInformation.cryptoArgs.currencySymbol)}',
+                              style: TextStyle(
+                                fontWeight: AppFontWeights.bold,
+                                fontSize: AppFontSizes.xs,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Você receberá ${value.toStringAsFixed(6)} da cripto ${tradeInformation.cryptoArgs.crypto.symbol}',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Você receberá',
+                              style: TextStyle(
+                                fontWeight: AppFontWeights.bold,
+                                fontSize: AppFontSizes.xs,
+                              ),
+                            ),
+                            Text(
+                              '${value.toStringAsFixed(6)} da cripto ${tradeInformation.cryptoArgs.crypto.symbol}',
+                              style: TextStyle(
+                                fontWeight: AppFontWeights.bold,
+                                fontSize: AppFontSizes.xs,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -82,27 +122,105 @@ class PurchaseConfirmationModal extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 16.0,
+            ),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Preço'),
                     Text(
-                      '1 ${tradeInformation.cryptoArgs.crypto.symbol} = R\$ ${tradeInformation.cryptoArgs.crypto.latestPrice.amount.amount.toCurrency(tradeInformation.cryptoArgs.currencySymbol)}',
+                      'Preço',
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                    Text(
+                      '1 ${tradeInformation.cryptoArgs.crypto.symbol} = ${tradeInformation.cryptoArgs.crypto.latestPrice.amount.amount.toCurrency(tradeInformation.cryptoArgs.currencySymbol)}',
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
                     ),
                   ],
                 ),
                 Divider(color: AppColors.grey),
-                Text('Valor da compra R\$ 99.00'),
-                Text('Taxa R\$ 2.00'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Valor da compra',
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                    Text(
+                      quantity
+                          .toStringAsFixed(2)
+                          .toCurrency(
+                            tradeInformation.cryptoArgs.currencySymbol,
+                          ),
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Taxas',
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                    Text(
+                      fee
+                          .toStringAsFixed(2)
+                          .toCurrency(
+                            tradeInformation.cryptoArgs.currencySymbol,
+                          ),
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                  ],
+                ),
                 Divider(color: AppColors.grey),
-                Text('Total a pagar R\$ 100.00'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total a pagar',
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                    Text(
+                      (quantity + fee)
+                          .toStringAsFixed(2)
+                          .toCurrency(
+                            tradeInformation.cryptoArgs.currencySymbol,
+                          ),
+                      style: TextStyle(
+                        fontWeight: AppFontWeights.medium,
+                        fontSize: AppFontSizes.xs,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 16.0),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(

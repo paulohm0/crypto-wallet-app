@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +16,16 @@ void showPurchaseConfirmationModal({
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
-    barrierColor: Colors.black.withAlpha(25),
+    barrierColor: Colors.black.withAlpha(75),
     builder:
-        (_) => PurchaseConfirmationModal(
-          tradeInformation: tradeInformation,
-          quantity: quantity,
-          value: value,
-          onConfirm: onConfirm,
+        (_) => BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // blur de fundo
+          child: PurchaseConfirmationModal(
+            tradeInformation: tradeInformation,
+            quantity: quantity,
+            value: value,
+            onConfirm: onConfirm,
+          ),
         ),
   );
 }

@@ -156,15 +156,18 @@ class _TradeViewState extends State<TradeView> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    showPurchaseConfirmationModal(
-                      context: context,
-                      tradeInformation: tradeInformation,
-                      quantity: controller.doubleValue,
-                      value: cryptoAmount,
-                      onConfirm: () {},
-                    );
-                  },
+                  onPressed:
+                      controller.doubleValue >= 10.0
+                          ? () {
+                            showPurchaseConfirmationModal(
+                              context: context,
+                              tradeInformation: tradeInformation,
+                              quantity: controller.doubleValue,
+                              value: cryptoAmount,
+                              onConfirm: () {},
+                            );
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(
