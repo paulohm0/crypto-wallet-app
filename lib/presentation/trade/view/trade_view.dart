@@ -3,6 +3,7 @@ import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/presentation/_common/widgets/app_bar_custom.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
+import 'package:crypto_wallet/presentation/trade/view_model/trade_view_model.dart';
 import 'package:crypto_wallet/presentation/trade/widgets/buy_crypto_form.dart';
 import 'package:crypto_wallet/presentation/trade/widgets/show_purchase_confirmation.dart';
 import 'package:currency_textfield/currency_textfield.dart';
@@ -18,13 +19,16 @@ class TradeView extends StatefulWidget {
 class _TradeViewState extends State<TradeView> {
   late CurrencyTextFieldController controller;
   late TradeArguments tradeInformation;
+  late TradeViewModel viewModel;
   String? errorFieldValue;
+  bool _hasInitialized = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     tradeInformation =
         ModalRoute.of(context)!.settings.arguments as TradeArguments;
+    viewModel = TradeViewModel(tradeInformation);
   }
 
   @override
@@ -36,7 +40,13 @@ class _TradeViewState extends State<TradeView> {
       thousandSymbol: '.',
       initDoubleValue: 0.00,
     );
-    controller.addListener(_updateValue);
+    controller.addListener(() {
+      if (_hasInitialized) {
+        setState(() {});
+      } else {
+        _hasInitialized = true;
+      }
+    });
   }
 
   @override
@@ -45,20 +55,8 @@ class _TradeViewState extends State<TradeView> {
     super.dispose();
   }
 
-  void _updateValue() {
-    setState(() {
-      errorFieldValue =
-          controller.doubleValue < 10.0 ? 'Valor mínimo é R\$ 10,00' : null;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final cryptoAmount =
-        controller.doubleValue /
-        double.parse(
-          tradeInformation.cryptoArgs.crypto.latestPrice.amount.amount,
-        );
     return Scaffold(
       appBar: AppBarCustom(),
       body: SafeArea(
@@ -95,57 +93,84 @@ class _TradeViewState extends State<TradeView> {
                       ],
                     ),
                     const SizedBox(height: 24.0),
-                    Text.rich(
-                      TextSpan(
-                        children: [
+                    viewModel.isBuy
+                        ? Text.rich(
                           TextSpan(
-                            text: 'Disponível para investir: ',
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontWeight: AppFontWeights.medium,
-                              fontSize: AppFontSizes.xs,
-                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Disponível para investir: ',
+                                style: TextStyle(
+                                  color: AppColors.grey,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'R\$ 0,00',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: 'R\$ 0,00',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: AppFontWeights.medium,
-                              fontSize: AppFontSizes.xs,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        )
+                        : SizedBox(),
                     const SizedBox(height: 4.0),
-                    Text.rich(
-                      TextSpan(
-                        children: [
+                    viewModel.isBuy
+                        ? Text.rich(
                           TextSpan(
-                            text: 'Valor Mínimo: ',
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontWeight: AppFontWeights.medium,
-                              fontSize: AppFontSizes.xs,
-                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Valor Mínimo: ',
+                                style: TextStyle(
+                                  color: AppColors.grey,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'R\$ 10,00',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                            ],
                           ),
+                        )
+                        : Text.rich(
                           TextSpan(
-                            text: 'R\$ 10,00',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: AppFontWeights.medium,
-                              fontSize: AppFontSizes.xs,
-                            ),
+                            children: [
+                              TextSpan(
+                                text: 'Atualmente você possue: ',
+                                style: TextStyle(
+                                  color: AppColors.grey,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                              TextSpan(
+                                text:
+                                    'R\$ 100,00 em ${tradeInformation.cryptoArgs.crypto.symbol}',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: AppFontWeights.medium,
+                                  fontSize: AppFontSizes.xs,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
                     const SizedBox(height: 24.0),
                     BuyCryptoForm(
                       tradeInformation: tradeInformation,
                       controller: controller,
-                      cryptoAmount: cryptoAmount,
-                      errorFieldValue: errorFieldValue,
+                      cryptoAmount: viewModel.getCryptoAmount(controller),
+                      errorFieldValue: viewModel.getErrorFieldValue(controller),
+                      viewModel: viewModel,
                     ),
                   ],
                 ),
@@ -157,13 +182,14 @@ class _TradeViewState extends State<TradeView> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed:
-                      controller.doubleValue >= 10.0
+                      viewModel.isValidFieldValue(controller)
                           ? () {
                             showPurchaseConfirmationModal(
                               context: context,
                               tradeInformation: tradeInformation,
                               quantity: controller.doubleValue,
-                              value: cryptoAmount,
+                              value: viewModel.getCryptoAmount(controller),
+                              viewModel: viewModel,
                               onConfirm: () {},
                             );
                           }

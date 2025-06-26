@@ -1,12 +1,9 @@
-enum TradeLabels { comprar, vender }
+enum TradeLabels {
+  comprar('Comprar'),
+  vender('Vender');
 
-extension TradeLabel on TradeLabels {
-  String get label {
-    switch (this) {
-      case TradeLabels.comprar:
-        return 'Comprar';
-      case TradeLabels.vender:
-        return 'Vender';
-    }
-  }
+  bool get isBuy => this == TradeLabels.comprar;
+
+  final String label;
+  const TradeLabels(this.label);
 }

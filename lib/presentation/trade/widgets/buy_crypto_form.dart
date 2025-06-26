@@ -1,6 +1,7 @@
 import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
+import 'package:crypto_wallet/presentation/trade/view_model/trade_view_model.dart';
 import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class BuyCryptoForm extends StatefulWidget {
   final TradeArguments tradeInformation;
   final CurrencyTextFieldController controller;
   final double cryptoAmount;
+  final TradeViewModel viewModel;
   final String? errorFieldValue;
   const BuyCryptoForm({
     super.key,
@@ -15,6 +17,7 @@ class BuyCryptoForm extends StatefulWidget {
     required this.controller,
     required this.cryptoAmount,
     required this.errorFieldValue,
+    required this.viewModel,
   });
 
   @override
@@ -37,7 +40,7 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
             fontWeight: AppFontWeights.medium,
           ),
           decoration: InputDecoration(
-            labelText: 'Qual valor deseja investir?',
+            labelText: widget.viewModel.inputLabel,
             labelStyle: TextStyle(color: AppColors.grey),
             prefixText: 'BRL',
             hintText: ' 0,00',
@@ -58,7 +61,7 @@ class _BuyCryptoFormState extends State<BuyCryptoForm> {
         const SizedBox(height: 8.0),
         Row(
           children: [
-            widget.controller.doubleValue > 0.0
+            widget.viewModel.isValidFieldCrypto(widget.controller)
                 ? Text(
                   '${widget.tradeInformation.cryptoArgs.crypto.symbol} ${widget.cryptoAmount.toStringAsFixed(6)}',
                   style: const TextStyle(

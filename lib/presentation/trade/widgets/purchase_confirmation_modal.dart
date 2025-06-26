@@ -5,10 +5,12 @@ import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dart';
+import 'package:crypto_wallet/presentation/trade/view_model/trade_view_model.dart';
 import 'package:flutter/material.dart';
 
 class PurchaseConfirmationModal extends StatelessWidget {
   final TradeArguments tradeInformation;
+  final TradeViewModel viewModel;
   final double quantity;
   final double value;
   final VoidCallback onConfirm;
@@ -19,6 +21,7 @@ class PurchaseConfirmationModal extends StatelessWidget {
     required this.quantity,
     required this.value,
     required this.onConfirm,
+    required this.viewModel,
   });
 
   double generateFee() {
@@ -66,14 +69,16 @@ class PurchaseConfirmationModal extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Você vai pagar',
+                              viewModel.amountLabel,
                               style: TextStyle(
                                 fontWeight: AppFontWeights.bold,
                                 fontSize: AppFontSizes.xs,
                               ),
                             ),
                             Text(
-                              'R\$ ${(quantity + fee).toStringAsFixed(2).toCurrency(tradeInformation.cryptoArgs.currencySymbol)}',
+                              viewModel.isBuy
+                                  ? 'R\$ ${(quantity + fee).toStringAsFixed(2).toCurrency(tradeInformation.cryptoArgs.currencySymbol)}'
+                                  : '${value.toStringAsFixed(6)} da cripto ${tradeInformation.cryptoArgs.crypto.symbol}',
                               style: TextStyle(
                                 fontWeight: AppFontWeights.bold,
                                 fontSize: AppFontSizes.xs,
@@ -92,7 +97,9 @@ class PurchaseConfirmationModal extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${value.toStringAsFixed(6)} da cripto ${tradeInformation.cryptoArgs.crypto.symbol}',
+                              viewModel.isBuy
+                                  ? '${value.toStringAsFixed(6)} da cripto ${tradeInformation.cryptoArgs.crypto.symbol}'
+                                  : 'R\$ ${(quantity + fee).toStringAsFixed(2).toCurrency(tradeInformation.cryptoArgs.currencySymbol)}',
                               style: TextStyle(
                                 fontWeight: AppFontWeights.bold,
                                 fontSize: AppFontSizes.xs,
@@ -152,7 +159,7 @@ class PurchaseConfirmationModal extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Valor da compra',
+                      viewModel.purchaseOrSaleLabel,
                       style: TextStyle(
                         fontWeight: AppFontWeights.medium,
                         fontSize: AppFontSizes.xs,
@@ -199,7 +206,7 @@ class PurchaseConfirmationModal extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total a pagar',
+                      viewModel.totalLabel,
                       style: TextStyle(
                         fontWeight: AppFontWeights.medium,
                         fontSize: AppFontSizes.xs,
@@ -237,7 +244,7 @@ class PurchaseConfirmationModal extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text(
-                  'Confirmar Compra',
+                  viewModel.confirmButtonLabel,
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: AppFontSizes.sm,
