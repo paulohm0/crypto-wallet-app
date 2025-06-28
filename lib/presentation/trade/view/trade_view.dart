@@ -116,31 +116,6 @@ class _TradeViewState extends State<TradeView> {
                             ],
                           ),
                         )
-                        : SizedBox(),
-                    const SizedBox(height: 4.0),
-                    viewModel.isBuy
-                        ? Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Valor Mínimo: ',
-                                style: TextStyle(
-                                  color: AppColors.grey,
-                                  fontWeight: AppFontWeights.medium,
-                                  fontSize: AppFontSizes.xs,
-                                ),
-                              ),
-                              TextSpan(
-                                text: 'R\$ 10,00',
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: AppFontWeights.medium,
-                                  fontSize: AppFontSizes.xs,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
                         : Text.rich(
                           TextSpan(
                             children: [
@@ -164,6 +139,29 @@ class _TradeViewState extends State<TradeView> {
                             ],
                           ),
                         ),
+                    const SizedBox(height: 4.0),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Valor Mínimo: ',
+                            style: TextStyle(
+                              color: AppColors.grey,
+                              fontWeight: AppFontWeights.medium,
+                              fontSize: AppFontSizes.xs,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'R\$ 10,00',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: AppFontWeights.medium,
+                              fontSize: AppFontSizes.xs,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 24.0),
                     BuyCryptoForm(
                       tradeInformation: tradeInformation,

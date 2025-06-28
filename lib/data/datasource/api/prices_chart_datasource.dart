@@ -1,4 +1,4 @@
-import 'package:crypto_wallet/data/models/prices_chart_model.dart';
+import 'package:crypto_wallet/data/models/cryptocurrency/prices_chart_model.dart';
 import 'package:dio/dio.dart';
 
 class PricesChartDatasource {

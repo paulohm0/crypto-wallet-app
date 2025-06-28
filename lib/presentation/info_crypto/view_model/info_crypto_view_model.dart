@@ -1,5 +1,5 @@
 import 'package:crypto_wallet/data/datasource/api/prices_chart_datasource.dart';
-import 'package:crypto_wallet/data/models/prices_chart_model.dart';
+import 'package:crypto_wallet/data/models/cryptocurrency/prices_chart_model.dart';
 import 'package:crypto_wallet/presentation/info_crypto/utils/filter_label_enum.dart';
 import 'package:crypto_wallet/shared/base_view_model/base_view_model.dart';
 import 'package:fl_chart/fl_chart.dart';

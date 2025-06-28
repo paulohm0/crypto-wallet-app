@@ -5,7 +5,7 @@ import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/core/utils/formater_crypto_amount.dart';
 import 'package:crypto_wallet/core/utils/translator_crypto_description.dart';
-import 'package:crypto_wallet/data/models/crypto_model.dart';
+import 'package:crypto_wallet/data/models/cryptocurrency/crypto_model.dart';
 import 'package:crypto_wallet/presentation/home/widgets/percent_change_indicator.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view_model/info_crypto_view_model.dart';
 import 'package:crypto_wallet/shared/navigation/app_routes.dart';
