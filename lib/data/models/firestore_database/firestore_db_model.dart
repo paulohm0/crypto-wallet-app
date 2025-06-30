@@ -1,22 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserFirestoreDbModel {
-  final String uid;
   final String name;
   final String email;
 
-  UserFirestoreDbModel({
-    required this.uid,
-    required this.name,
-    required this.email,
-  });
+  UserFirestoreDbModel({required this.name, required this.email});
 
   factory UserFirestoreDbModel.fromMap(String id, Map<String, dynamic> map) {
-    return UserFirestoreDbModel(
-      uid: id,
-      name: map['name'],
-      email: map['email'],
-    );
+    return UserFirestoreDbModel(name: map['name'], email: map['email']);
   }
 
   Map<String, dynamic> toMap() {
@@ -69,7 +60,7 @@ class CryptoAssetDbModel {
 
 class TransactionModel {
   final DateTime timestamp;
-  final String side; // 'Compra' ou 'Venda'
+  final String side;
   final String cryptoName;
   final String iconUrl;
   final double amount;

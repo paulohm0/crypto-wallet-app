@@ -2,6 +2,8 @@ import 'package:crypto_wallet/core/theme/app_colors.dart';
 import 'package:crypto_wallet/core/theme/app_font_sizes.dart';
 import 'package:crypto_wallet/core/theme/app_font_weights.dart';
 import 'package:crypto_wallet/data/datasource/auth/login_with_gmail.dart';
+import 'package:crypto_wallet/data/datasource/firestore_db_repository/db_repository.dart';
+import 'package:crypto_wallet/data/models/firestore_database/firestore_db_model.dart';
 import 'package:crypto_wallet/presentation/login/widgets/email_password_input.dart';
 import 'package:crypto_wallet/presentation/login/widgets/login_header.dart';
 import 'package:crypto_wallet/shared/navigation/app_routes.dart';
@@ -18,6 +20,14 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _auth = GoogleAuth();
+  final _db = DbRepository();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +108,17 @@ class _LoginViewState extends State<LoginView> {
                         OutlinedButton(
                           onPressed: () async {
                             final user = await _auth.signInWithGoogle();
+                            final UserFirestoreDbModel userData =
+                                UserFirestoreDbModel(
+                                  name: user?.user?.displayName ?? '',
+                                  email: user?.user?.email ?? '',
+                                );
                             if (user != null) {
+                              _db.addUser(userData);
                               Navigator.pushReplacementNamed(
                                 context,
                                 AppRoutes.main,
-                              ); // ou qualquer rota
+                              );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
