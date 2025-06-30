@@ -19,6 +19,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final RefreshController refreshController = RefreshController();
   bool _isInit = true;
   late HomeViewModel viewModel;
 
@@ -34,9 +35,13 @@ class _HomeViewState extends State<HomeView> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final RefreshController refreshController = RefreshController();
+  void dispose() {
+    super.dispose();
+    refreshController.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, _) {
@@ -120,50 +125,52 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Divider(color: AppColors.divider),
                   Expanded(
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 500),
-                      switchInCurve: Curves.easeOut,
-                      switchOutCurve: Curves.easeIn,
-                      transitionBuilder: (child, animation) {
-                        return FadeTransition(opacity: animation, child: child);
-                      },
-                      child:
-                          viewModel.state == ViewState.loading
-                              ? const LoadingList()
-                              : SmartRefresher(
-                                controller: refreshController,
-                                onRefresh: () async {
-                                  viewModel.refreshCryptoCurrencies(context);
-                                  refreshController.refreshCompleted();
-                                },
-                                header: MaterialClassicHeader(
-                                  color: AppColors.white,
-                                  backgroundColor: AppColors.transparent,
+                    child: Stack(
+                      children: [
+                        SmartRefresher(
+                          controller: refreshController,
+                          onRefresh: () async {
+                            viewModel.refreshCryptoCurrencies(context);
+                            refreshController.refreshCompleted();
+                          },
+                          header: MaterialClassicHeader(
+                            color: AppColors.white,
+                            backgroundColor: AppColors.transparent,
+                          ),
+                          child: ListView.separated(
+                            physics: const ClampingScrollPhysics(),
+                            separatorBuilder:
+                                (_, __) => const Divider(
+                                  color: AppColors.divider,
+                                  height: 0.5,
                                 ),
-                                child: ListView.separated(
-                                  physics: const ClampingScrollPhysics(),
-                                  shrinkWrap: false,
-                                  separatorBuilder: (context, index) {
-                                    return const Divider(
-                                      color: AppColors.divider,
-                                      height: 0.5,
-                                    );
-                                  },
-                                  itemCount: viewModel.filteredCryptos.length,
-                                  itemBuilder: (context, index) {
-                                    final crypto =
-                                        viewModel.filteredCryptos[index];
-                                    return CryptoItemHome(
-                                      currencySymbol:
-                                          Currency.fromCode(
-                                            viewModel.currency,
-                                          )?.sifra ??
-                                          '?',
-                                      crypto: crypto,
-                                    );
-                                  },
-                                ),
-                              ),
+                            itemCount: viewModel.filteredCryptos.length,
+                            itemBuilder: (context, index) {
+                              final crypto = viewModel.filteredCryptos[index];
+                              return CryptoItemHome(
+                                currencySymbol:
+                                    Currency.fromCode(
+                                      viewModel.currency,
+                                    )?.sifra ??
+                                    '?',
+                                crypto: crypto,
+                              );
+                            },
+                          ),
+                        ),
+                        AnimatedOpacity(
+                          opacity:
+                              viewModel.state == ViewState.loading ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 400),
+                          child: IgnorePointer(
+                            ignoring: viewModel.state != ViewState.loading,
+                            child: const ColoredBox(
+                              color: Colors.black,
+                              child: Center(child: LoadingList()),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

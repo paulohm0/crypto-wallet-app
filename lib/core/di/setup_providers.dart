@@ -4,6 +4,7 @@ import 'package:crypto_wallet/data/datasource/api/crypto_datasource.dart';
 import 'package:crypto_wallet/data/datasource/api/prices_chart_datasource.dart';
 import 'package:crypto_wallet/presentation/home/view_model/home_view_model.dart';
 import 'package:crypto_wallet/presentation/info_crypto/view_model/info_crypto_view_model.dart';
+import 'package:crypto_wallet/shared/navigation/main_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ MultiProvider setupProviders({required Widget child}) {
       ChangeNotifierProvider(
         create: (_) => InfoCryptoViewModel(PricesChartDatasource(dio)),
       ),
+      ChangeNotifierProvider(create: (_) => MainNavController()),
     ],
     child: child,
   );

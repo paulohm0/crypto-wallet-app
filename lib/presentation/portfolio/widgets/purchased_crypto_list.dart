@@ -12,7 +12,7 @@ class PurchasedCryptoList extends StatelessWidget {
       separatorBuilder: (context, index) {
         return const Divider(color: AppColors.divider, height: 0.5);
       },
-      itemCount: 6,
+      itemCount: 1,
       itemBuilder: (context, index) {
         return PurchasedCryptoItem();
       },

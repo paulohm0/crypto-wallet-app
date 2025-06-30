@@ -6,8 +6,11 @@ import 'package:crypto_wallet/presentation/info_crypto/view/info_crypto_view.dar
 import 'package:crypto_wallet/presentation/trade/view_model/trade_view_model.dart';
 import 'package:crypto_wallet/presentation/trade/widgets/buy_crypto_form.dart';
 import 'package:crypto_wallet/presentation/trade/widgets/show_purchase_confirmation.dart';
+import 'package:crypto_wallet/shared/navigation/app_routes.dart';
+import 'package:crypto_wallet/shared/navigation/main_nav_controller.dart';
 import 'package:currency_textfield/currency_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TradeView extends StatefulWidget {
   const TradeView({super.key});
@@ -188,7 +191,16 @@ class _TradeViewState extends State<TradeView> {
                               quantity: controller.doubleValue,
                               value: viewModel.getCryptoAmount(controller),
                               viewModel: viewModel,
-                              onConfirm: () {},
+                              onConfirm: () {
+                                Provider.of<MainNavController>(
+                                  context,
+                                  listen: false,
+                                ).setIndex(1);
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  AppRoutes.main,
+                                );
+                              },
                             );
                           }
                           : null,

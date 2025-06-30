@@ -5,6 +5,9 @@ import 'package:crypto_wallet/presentation/home/view/home_view.dart';
 import 'package:crypto_wallet/presentation/portfolio/view/portfolio_view.dart';
 import 'package:crypto_wallet/presentation/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'main_nav_controller.dart';
 
 class MainNavView extends StatefulWidget {
   const MainNavView({super.key});
@@ -14,12 +17,12 @@ class MainNavView extends StatefulWidget {
 }
 
 class _MainNavViewState extends State<MainNavView> {
-  int _selectedIndex = 0;
+  late MainNavController controller;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    controller = context.watch<MainNavController>();
   }
 
   final List<Widget> _routes = [
@@ -32,7 +35,7 @@ class _MainNavViewState extends State<MainNavView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCustom(),
-      body: IndexedStack(index: _selectedIndex, children: _routes),
+      body: IndexedStack(index: controller.index, children: _routes),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           splashColor: AppColors.grey2.withAlpha(75),
@@ -54,8 +57,8 @@ class _MainNavViewState extends State<MainNavView> {
                 label: 'Perfil',
               ),
             ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
+            currentIndex: controller.index,
+            onTap: (index) => controller.setIndex(index),
             type: BottomNavigationBarType.fixed,
             backgroundColor: AppColors.black,
             unselectedItemColor: Colors.white,
