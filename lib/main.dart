@@ -9,6 +9,7 @@ import 'package:crypto_wallet/presentation/trade/view/trade_view.dart';
 import 'package:crypto_wallet/presentation/welcome/view/welcome_view.dart';
 import 'package:crypto_wallet/shared/navigation/app_routes.dart';
 import 'package:crypto_wallet/shared/navigation/main_nav_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class CryptoWalletApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorObservers: [KeyboardDismissObserver()],
       theme: AppTheme.theme,
-      initialRoute: AppRoutes.welcome,
+      home: _AuthenticationGate(),
       routes: {
         AppRoutes.welcome: (context) => WelcomeView(),
         AppRoutes.login: (context) => LoginView(),
@@ -41,6 +42,28 @@ class CryptoWalletApp extends StatelessWidget {
         AppRoutes.infoCrypto: (context) => InfoCryptoView(),
         AppRoutes.portfolio: (context) => PortfolioView(),
         AppRoutes.trade: (context) => TradeView(),
+      },
+    );
+  }
+}
+
+class _AuthenticationGate extends StatelessWidget {
+  const _AuthenticationGate();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: FirebaseAuth.instance.authStateChanges().first,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else if (snapshot.hasData) {
+          return const MainNavView();
+        } else {
+          return const WelcomeView();
+        }
       },
     );
   }

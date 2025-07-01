@@ -8,11 +8,21 @@ class DbRepository {
 
   Future<void> addUser(UserFirestoreDbModel userData) async {
     try {
-      await databaseRepository.dbFirestore
-          .collection('users')
-          .add(userData.toMap());
+      final querySnapshot =
+          await databaseRepository.dbFirestore
+              .collection('users')
+              .where('email', isEqualTo: userData.email)
+              .limit(1)
+              .get();
+      if (querySnapshot.docs.isEmpty) {
+        await databaseRepository.dbFirestore
+            .collection('users')
+            .add(userData.toMap());
+      } else {
+        log('Usuário já existe.');
+      }
     } catch (e, st) {
-      log('Erro ao adicionar usuário', error: e, stackTrace: st);
+      log('Erro ao verificar/criar usuário', error: e, stackTrace: st);
     }
   }
 }
